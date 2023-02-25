@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".back.LoginFragment"
     android:fillViewport="true">
 
@@ -31,17 +31,36 @@
             style="@style/SignInEditText"
             />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_password"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="29dp"
-            android:layout_marginTop="30dp"
-            android:hint="Password"
-            style="@style/SignInEditText"
-            />
+            android:layout_marginTop="30dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                style="@style/SignInEditText"
+                />
+
+            <ImageView
+                android:id="@+id/btn_password_visibility"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_visibility_off_grey"
+                android:contentDescription="password" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_sign_in"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
