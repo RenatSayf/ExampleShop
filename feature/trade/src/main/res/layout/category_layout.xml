@@ -5,6 +5,181 @@
     android:orientation="horizontal"
     android:fillViewport="true">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/CategoryContainerStyle">
+
+            <FrameLayout
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_eeeff4">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_category_phones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_phone"
+                    android:background="@drawable/bg_circle_eeeff4"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phones"
+                style="@style/CategoryTextViewStyle" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/CategoryContainerStyle">
+
+            <FrameLayout android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_eeeff4">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_category_headphones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_headphones"
+                    android:background="@drawable/bg_circle_eeeff4"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Headphones"
+                style="@style/CategoryTextViewStyle"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/CategoryContainerStyle">
+
+            <FrameLayout android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_eeeff4">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_category_games"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_games"
+                    android:background="@drawable/bg_circle_eeeff4"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Games"
+                style="@style/CategoryTextViewStyle"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/CategoryContainerStyle">
+
+            <FrameLayout android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_eeeff4">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_category_cars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_car"
+                    android:background="@drawable/bg_circle_eeeff4"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cars"
+                style="@style/CategoryTextViewStyle"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/CategoryContainerStyle">
+
+            <FrameLayout android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_eeeff4">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_category_furniture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_furniture"
+                    android:background="@drawable/bg_circle_eeeff4"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Furniture"
+                style="@style/CategoryTextViewStyle"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/CategoryContainerStyle">
+
+            <FrameLayout android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_eeeff4">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_category_kids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_kids"
+                    android:background="@drawable/bg_circle_eeeff4"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kids"
+                style="@style/CategoryTextViewStyle"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>
