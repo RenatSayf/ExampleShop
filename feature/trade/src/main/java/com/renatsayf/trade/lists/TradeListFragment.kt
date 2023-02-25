@@ -1,4 +1,4 @@
-package com.renatsayf.login.sign_in
+package com.renatsayf.trade.lists
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,20 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.renatsayf.login.R
-import com.renatsayf.login.databinding.FragmentSignInBinding
+import com.renatsayf.trade.R
+import com.renatsayf.trade.databinding.FragmentTradeListBinding
 
-class SignInFragment : Fragment() {
+class TradeListFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignInBinding
-    private lateinit var viewModel: SignInViewModel
+    private lateinit var binding: FragmentTradeListBinding
+    private lateinit var viewModel: TradeListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSignInBinding.inflate(inflater, container, false)
+        binding = FragmentTradeListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,9 +27,7 @@ class SignInFragment : Fragment() {
 
         with(binding) {
 
-            btnLogin.setOnClickListener {
-                findNavController().navigate(R.id.action_signInFragment_to_loginFragment)
-            }
+
         }
     }
 
