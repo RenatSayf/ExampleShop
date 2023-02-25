@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    tools:context="com.renatsayf.login.sign_in.SignInFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="42dp"
+        android:background="@color/color_screen_bg">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            style="@style/HeadTextView"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_marginTop="60dp"
+            android:hint="First name"
+            style="@style/SignInEditText"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_marginTop="30dp"
+            android:hint="Last name"
+            style="@style/SignInEditText"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_email_name"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_marginTop="30dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            style="@style/SignInEditText"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_ripple_sign_in_btn"
+            android:text="Sign in"
+            style="@style/SignInButton"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_is_account"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Already have an account?"
+                android:textColor="@color/color_helper_text"
+                android:textSize="10sp"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center_vertical"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/tv_is_account"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Log in"
+                android:textSize="10sp"
+                android:textAllCaps="false"
+                android:textColor="@color/color_text_log_in"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_ripple_borderless_btn"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Sign in with Google"
+            android:background="@drawable/bg_ripple_borderless_btn"
+            android:drawableStart="@drawable/ic_google_logo"
+            android:theme="@style/GoogleSignInButton"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Sign in with Apple"
+            android:background="@drawable/bg_ripple_borderless_btn"
+            android:drawableStart="@drawable/ic_apple_logo"
+            android:theme="@style/GoogleSignInButton"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>
