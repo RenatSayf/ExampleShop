@@ -11,8 +11,8 @@ class TradeListViewModel : ViewModel() {
 
     private var _categoryList = MutableStateFlow<Result<List<Category>>>(Result.failure(Throwable("Empty list"))).apply {
         viewModelScope.launch {
-            val data = Category.data
             value = try {
+                val data = Category.data
                 Result.success(data)
             } catch (e: Exception) {
                 Result.failure(Throwable(e))

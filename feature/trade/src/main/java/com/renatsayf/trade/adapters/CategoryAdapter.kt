@@ -23,7 +23,7 @@ object CategoryAdapter {
             }
         }
 
-    val diffCallback = object :DiffUtil.ItemCallback<Category>(){
+    val diffCallback = object : DiffUtil.ItemCallback<Category>(){
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem.id == newItem.id
         }
