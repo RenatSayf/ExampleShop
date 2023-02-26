@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#08FFFFFF</color>
+
+    <color name="color_screen_bg">#FAF9FF</color>
+    <color name="color_head_screen">#161826</color>
+    <color name="color_registration_bg_et">#E8E8E8</color>
+    <color name="text_color_sign_in_et">#7B7B7B</color>
+    <color name="color_sign_in_btn">#4E55D7</color>
+    <color name="color_helper_text">#808080</color>
+    <color name="color_text_log_in">#254FE6</color>
+
     <color name="color_EEEFF4">#EEEFF4</color>
     <color name="color_A6A7AB">#A6A7AB</color>
     <color name="color_040402">#040402</color>

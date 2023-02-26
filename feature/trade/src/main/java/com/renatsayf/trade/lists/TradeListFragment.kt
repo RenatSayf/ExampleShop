@@ -1,18 +1,28 @@
 package com.renatsayf.trade.lists
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.renatsayf.trade.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.renatsayf.trade.adapters.CategoryAdapter
 import com.renatsayf.trade.databinding.FragmentTradeListBinding
+import com.renatsayf.trade.models.Category
 
 class TradeListFragment : Fragment() {
 
     private lateinit var binding: FragmentTradeListBinding
-    private lateinit var viewModel: TradeListViewModel
+    private val viewModel: TradeListViewModel by viewModels()
+
+    private val categoryAdapter = AsyncListDifferDelegationAdapter(
+        CategoryAdapter.diffCallback,
+        CategoryAdapter.categoryAdapterDelegate {
+            categoryAdapterItemClick(it)
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +37,30 @@ class TradeListFragment : Fragment() {
 
         with(binding) {
 
+            includeCategory.rvCategoryList.apply {
+//                this.setFlat(true)
+//                setInfinite(true)
+//                setIntervalRatio(0.9f)
+            }.adapter = categoryAdapter
+
+            lifecycleScope.launchWhenStarted {
+                viewModel.categoryList.collect { res ->
+                    res.onSuccess { list ->
+                        categoryAdapter.items = list
+                    }
+                    res.onFailure {
+                        TODO()
+                    }
+                }
+            }
+
+
 
         }
+    }
+
+    private fun categoryAdapterItemClick(category: Category) {
+
     }
 
 }

@@ -20,7 +20,9 @@
             android:id="@+id/btn_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_headline_black"/>
+            android:background="@drawable/bg_ripple_transparent"
+            android:src="@drawable/ic_headline_black"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -105,7 +107,7 @@
 
         <include
             android:id="@+id/include_category"
-            layout="@layout/category_layout" />
+            layout="@layout/layout_category_2" />
 
     </FrameLayout>
 
