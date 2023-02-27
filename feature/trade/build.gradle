@@ -59,4 +59,7 @@ dependencies {
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
 
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
