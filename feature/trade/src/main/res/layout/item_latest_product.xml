@@ -30,16 +30,18 @@
             android:layout_width="35dp"
             android:layout_height="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.65"
             android:layout_marginStart="7dp"
+            android:layout_marginBottom="46dp"
             android:background="@drawable/bg_category_round_corners"
             android:gravity="center"
             android:text="Phones"
             android:fontFamily="@font/poppins_semibold"
             android:textSize="6sp"
-            android:textColor="@color/color_070604"/>
+            android:textColor="@color/color_070604"
+            android:includeFontPadding="false"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_product_name"
@@ -67,6 +69,8 @@
             android:textColor="@color/white"
             android:textSize="7sp"
             android:gravity="bottom"
+            android:includeFontPadding="false"
+            android:lineSpacingMultiplier="0"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
