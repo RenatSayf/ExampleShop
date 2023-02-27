@@ -1,11 +1,11 @@
-package com.renatsayf.trade
+package com.renatsayf.exampleshop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class TradeActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trade)
+        setContentView(R.layout.activity_main)
     }
 }
