@@ -4,6 +4,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#08FFFFFF</color>
+    <color name="color_white_transparent">#00FFFFFF</color>
+    <color name="color_dark_transparent_30">#66121212</color>
+    <color name="color_C4C4C_85">#D9C4C4C4</color>
 
     <color name="color_screen_bg">#FAF9FF</color>
     <color name="color_head_screen">#161826</color>
@@ -18,6 +21,7 @@
     <color name="color_040402">#040402</color>
     <color name="color_808080">#808080</color>
     <color name="color_E5E9EF">#E5E9EF</color>
-    <color name="color_070604">#070604</color>
+    <color name="color_070604">#121212</color>
+    <color name="color_545589">#545589</color>
 
 </resources>

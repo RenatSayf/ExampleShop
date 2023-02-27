@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="114dp"
     android:layout_height="149dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
@@ -11,6 +11,7 @@
     android:animateLayoutChanges="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,39 +23,53 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/bg_color_filter_product_card" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_category_name"
-            android:layout_width="35dp"
-            android:layout_height="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-
+            android:layout_height="74dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.65"
+            android:src="@drawable/bg_gradient_card" />
+
+        <FrameLayout
+            android:id="@+id/layout_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="35dp"
+            android:minHeight="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_name"
             android:layout_marginStart="7dp"
-            android:layout_marginBottom="46dp"
-            android:background="@drawable/bg_category_round_corners"
-            android:gravity="center"
-            android:text="Phones"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="6sp"
-            android:textColor="@color/color_070604"
-            android:includeFontPadding="false"/>
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/bg_category_grey"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_category_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                tools:text="Phones"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="6sp"
+                android:textColor="@color/color_070604"
+                android:includeFontPadding="false"
+                tools:ignore="SmallSp" />
+
+        </FrameLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_product_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="26sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_category_name"
+            app:layout_constraintBottom_toTopOf="@+id/tv_price"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintHorizontal_bias="0"
+            android:includeFontPadding="false"
             android:layout_marginStart="7dp"
-            android:text="Samsung S10"
+            tools:text="Samsung S10"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
             android:textSize="9sp"
-            />
+            tools:ignore="SmallSp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_price"
@@ -63,17 +78,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="7dp"
-            android:layout_marginBottom="4dp"
-            android:text="$ 180,000"
+            android:layout_marginBottom="7dp"
+            tools:text="$ 180,000"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
             android:textSize="7sp"
             android:gravity="bottom"
             android:includeFontPadding="false"
             android:lineSpacingMultiplier="0"
-            />
+            tools:ignore="SmallSp" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_add"
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +98,8 @@
             android:layout_marginBottom="5dp"
             android:text="+"
             android:gravity="center"
-            android:background="@drawable/bg_circle_e5e9ef"/>
+            android:background="@drawable/bg_circle_e5e9ef"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
