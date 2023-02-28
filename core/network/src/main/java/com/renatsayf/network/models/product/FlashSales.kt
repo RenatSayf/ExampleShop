@@ -8,12 +8,7 @@ data class FlashSales(
     val flash_sale: List<Product>
 ): Serializable, ISales {
 
-    override fun getListName(): String {
-        val fieldName = flash_sale.javaClass.fields[0].name
-        return fieldName
-            .replace("_", " ")
-            .replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-            }
+    override fun getListTitle(): String {
+        return "Flash sale"
     }
 }

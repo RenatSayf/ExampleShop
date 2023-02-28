@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.renatsayf.network.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -9,10 +11,9 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.*
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 
 @RunWith(AndroidJUnit4::class)
@@ -83,13 +84,58 @@ class NetRepositoryTest {
 
             val actualResponse = repository.getLatestDealsAsync().await()
             val actualResult = actualResponse.body()
+
             val expectedSize = 4
             Assert.assertEquals(expectedSize, actualResult?.latest?.size)
-            Assert.assertTrue(actualResult?.latest?.get(0) is Product)
+
+            val actualProduct = actualResult?.latest?.get(0)
+            Assert.assertTrue(actualProduct is Product)
+
+            val actualListName = actualResult?.getListTitle()
+            Assert.assertEquals("Latest", actualListName)
         }
     }
 
     @Test
     fun getFlashSalesAsync() {
+
+        val body = """{
+  "flash_sale": [
+    {
+      "category": "Kids",
+      "name": "New Balance Sneakers",
+      "price": 22.5,
+      "discount": 30,
+      "image_url": "https://newbalance.ru/upload/iblock/697/iz997hht_nb_02_i.jpg"
+    },
+    {
+      "category": "Kids",
+      "name": "Reebok Classic",
+      "price": 24,
+      "discount": 30,
+      "image_url": "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3613ebaf6ed24a609818ac63000250a3_9366/Classic_Leather_Shoes_-_Toddler_White_FZ2093_01_standard.jpg"
+    }
+  ]
+}"""
+        val response = MockResponse().apply {
+            setResponseCode(200)
+            setBody(body)
+        }
+        server.enqueue(response)
+
+        runBlocking {
+
+            val actualResponse = repository.getFlashSalesAsync().await()
+            val actualResult = actualResponse.body()
+
+            val expectedSize = 2
+            Assert.assertEquals(expectedSize, actualResult?.flash_sale?.size)
+
+            val actualProduct = actualResult?.flash_sale?.get(0)
+            Assert.assertTrue(actualProduct is Product)
+
+            val actualListName = actualResult?.getListTitle()
+            Assert.assertEquals("Flash sale", actualListName)
+        }
     }
 }
