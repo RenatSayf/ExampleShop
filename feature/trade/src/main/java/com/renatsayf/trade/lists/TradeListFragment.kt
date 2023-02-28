@@ -1,21 +1,32 @@
 package com.renatsayf.trade.lists
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.renatsayf.core.di.modules.NetRepositoryModule
+import com.renatsayf.network.models.Category
+import com.renatsayf.network.repository.NetRepository
 import com.renatsayf.trade.adapters.CategoryAdapter
 import com.renatsayf.trade.databinding.FragmentTradeListBinding
-import com.renatsayf.trade.models.Category
+import javax.inject.Inject
 
 class TradeListFragment : Fragment() {
 
     private lateinit var binding: FragmentTradeListBinding
-    private val viewModel: TradeListViewModel by viewModels()
+
+    @Inject
+    lateinit var netRepository: NetRepository
+
+    private val viewModel: TradeListViewModel by lazy {
+        netRepository = NetRepositoryModule.provideNetRepository()
+        val factory = TradeListViewModel.Factory(netRepository)
+        ViewModelProvider(this, factory)[TradeListViewModel::class.java]
+    }
 
     private val categoryAdapter = AsyncListDifferDelegationAdapter(
         CategoryAdapter.diffCallback,
@@ -49,13 +60,28 @@ class TradeListFragment : Fragment() {
                         categoryAdapter.items = list
                     }
                     res.onFailure {
-                        TODO()
+                        //TODO()
+                    }
+                }
+
+            }
+            lifecycleScope.launchWhenStarted {
+                viewModel.state.collect { state ->
+                    when(state) {
+                        TradeListViewModel.State.EmptyData -> {
+
+                        }
+                        TradeListViewModel.State.Loading -> {
+
+                        }
+                        is TradeListViewModel.State.Success -> {
+                            val flash = state.flash
+                            val latest = state.latest
+                            latest
+                        }
                     }
                 }
             }
-
-
-
         }
     }
 

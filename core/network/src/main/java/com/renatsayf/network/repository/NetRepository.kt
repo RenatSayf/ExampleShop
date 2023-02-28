@@ -2,29 +2,39 @@ package com.renatsayf.network.repository
 
 import com.renatsayf.network.data.ApiBuilder
 import com.renatsayf.network.data.IApi
+import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 class NetRepository(
     private val api: IApi = ApiBuilder.api
 ) {
-    suspend fun getLatestDealsAsync(): Deferred<Response<LatestDeals>> {
-        return coroutineScope {
-            async {
-                api.getLatestDealsAsync()
-            }
+
+    fun getLatestDeals() = flow<Result<LatestDeals>> {
+        val body = api.getLatestDealsAsync().body()
+        body?.let {
+            emit(Result.success(it))
+        }?: run {
+            emit(Result.failure(Throwable("Empty data")))
         }
     }
 
-    suspend fun getFlashSalesAsync(): Deferred<Response<FlashSales>> {
-        return coroutineScope {
-            async {
-                api.getFlashSalesAsync()
-            }
+    fun getFlashSale() = flow<Result<FlashSales>> {
+        val body = api.getFlashSalesAsync().body()
+        body?.let {
+            emit(Result.success(it))
+        }?: run {
+            emit(Result.failure(Throwable("Empty data")))
         }
+    }
+
+    fun getCategories() = flow {
+        val list = Category.get()
+        emit(list)
     }
 }

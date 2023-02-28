@@ -2,8 +2,9 @@ package com.renatsayf.trade.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import com.renatsayf.network.models.Category
 import com.renatsayf.trade.databinding.ItemCategoryBinding
-import com.renatsayf.trade.models.Category
+
 
 object CategoryAdapter {
 
