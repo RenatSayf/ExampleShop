@@ -1,4 +1,4 @@
-package com.renatsayf.core.di.modules
+package com.renatsayf.exampleshop.di.modules
 
 import com.renatsayf.network.data.ApiBuilder
 import com.renatsayf.network.data.IApi

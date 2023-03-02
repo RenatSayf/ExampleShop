@@ -14,4 +14,21 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/main_nav_graph" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_white_round_corners"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemBackground="@drawable/bg_selector_bottom_nav"
+        app:itemIconTint="@color/color_909090"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="24dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

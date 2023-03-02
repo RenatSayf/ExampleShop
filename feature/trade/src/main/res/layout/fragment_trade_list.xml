@@ -111,7 +111,7 @@
 
     </FrameLayout>
 
-    <FrameLayout
+    <ScrollView
         android:id="@+id/head_latest_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,12 +119,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="17dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:fillViewport="true">
 
-        <include android:id="@+id/include_view_all"
-            layout="@layout/layout_head_latest"/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </FrameLayout>
+            <include android:id="@+id/include_list_latest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/layout_latest_list"/>
+
+            <include android:id="@+id/include_flash_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/layout_flash_list"
+                android:layout_marginTop="17dp"/>
+
+            <include android:id="@+id/include_list_latest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/layout_latest_list"
+                android:layout_marginTop="17dp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

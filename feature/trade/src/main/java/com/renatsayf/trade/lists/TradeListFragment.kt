@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import com.renatsayf.core.di.modules.NetRepositoryModule
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.repository.NetRepository
 import com.renatsayf.trade.adapters.CategoryAdapter
@@ -23,7 +22,7 @@ class TradeListFragment : Fragment() {
     lateinit var netRepository: NetRepository
 
     private val viewModel: TradeListViewModel by lazy {
-        netRepository = NetRepositoryModule.provideNetRepository()
+
         val factory = TradeListViewModel.Factory(netRepository)
         ViewModelProvider(this, factory)[TradeListViewModel::class.java]
     }
@@ -34,6 +33,12 @@ class TradeListFragment : Fragment() {
             categoryAdapterItemClick(it)
         }
     )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

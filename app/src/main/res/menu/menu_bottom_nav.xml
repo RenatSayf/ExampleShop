@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:icon="@drawable/ic_home"
+        tools:title="Home" android:title=""
+        app:actionLayout="@layout/layout_menu_item"
+        app:showAsAction="always"
+        />
+
+    <item android:icon="@drawable/ic_menu_favorite"
+        tools:title="Favorite" android:title=""
+        app:actionLayout="@layout/layout_menu_item"
+        app:showAsAction="always"
+        />
+
+    <item android:icon="@drawable/ic_basket"
+        tools:title="Basket" android:title=""
+        app:actionLayout="@layout/layout_menu_item"
+        app:showAsAction="ifRoom"
+        />
+
+    <item android:icon="@drawable/ic_notification"
+        tools:title="Notification" android:title=""
+        app:actionLayout="@layout/layout_menu_item"
+        app:showAsAction="ifRoom"
+        />
+
+    <item android:icon="@drawable/ic_profile"
+        tools:title="Profile" android:title=""
+        app:actionLayout="@layout/layout_menu_item"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>
