@@ -27,4 +27,21 @@
         <item name="android:textColor">@color/color_808080</item>
     </style>
 
+    <style name="SignInButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_ripple_sign_in_btn</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+    
+    <style name="ItemProfileStyle" parent="TextAppearance.AppCompat">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_040402</item>
+        <item name="android:background">@drawable/bg_ripple_borderless_btn</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 </resources>

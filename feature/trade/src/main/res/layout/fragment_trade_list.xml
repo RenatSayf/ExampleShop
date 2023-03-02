@@ -139,7 +139,7 @@
                 layout="@layout/layout_flash_list"
                 android:layout_marginTop="17dp"/>
 
-            <include android:id="@+id/include_list_latest"
+            <include android:id="@+id/include_list_brands"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/layout_latest_list"

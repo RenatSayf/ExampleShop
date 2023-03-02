@@ -1,13 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".ProfileFragment">
 
-    <TextView
+    <include android:id="@+id/include_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="?android:attr/actionBarSize"
+        layout="@layout/layout_tool_bar"/>
 
-</FrameLayout>
+
+    <include android:id="@+id/include_about_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/layout_about_user"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/SignInButton"
+            android:text="Upload item"
+            android:textColor="@color/color_EAEAEA"
+            android:elevation="0dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="52dp"
+            android:src="@drawable/ic_upload"
+            android:elevation="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_trade_store"
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:drawableStart="@drawable/ic_credit_card_circle_bg_grey"
+                android:text="Trade store"
+                android:drawableEnd="@drawable/ic_right_chevron"
+                style="@style/ItemProfileStyle"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_payment_method"
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:drawableStart="@drawable/ic_credit_card_circle_bg_grey"
+                android:text="Payment method"
+                android:drawableEnd="@drawable/ic_right_chevron"
+                style="@style/ItemProfileStyle"
+                />
+
+            <FrameLayout
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_balance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+
+                    android:drawableStart="@drawable/ic_credit_card_circle_bg_grey"
+                    android:text="Balance"
+                    style="@style/ItemProfileStyle"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_balance_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center|end"
+                    android:text="$ 1593"
+                    style="@style/ItemProfileStyle"
+                    />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_trade_history"
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:drawableStart="@drawable/ic_credit_card_circle_bg_grey"
+                android:text="Trade history"
+                android:drawableEnd="@drawable/ic_right_chevron"
+                style="@style/ItemProfileStyle"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_restore_purchase"
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:drawableStart="@drawable/ic_restore_circle_bg_grey"
+                android:text="Restore Purchase"
+                android:drawableEnd="@drawable/ic_right_chevron"
+                style="@style/ItemProfileStyle"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_help"
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:drawableStart="@drawable/ic_help_circle_grey_bg"
+                android:text="Help"
+                style="@style/ItemProfileStyle"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_log_out"
+                android:layout_width="298dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:drawableStart="@drawable/ic_credit_card_circle_bg_grey"
+                android:text="Log out"
+                style="@style/ItemProfileStyle"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
