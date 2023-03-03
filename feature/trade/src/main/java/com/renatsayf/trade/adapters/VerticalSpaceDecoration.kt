@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class VerticalSpaceDecoration(private val spaceHeight: Int = 8) : RecyclerView.ItemDecoration() {
+class VerticalSpaceDecoration(private val spaceHeight: Int = 80) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

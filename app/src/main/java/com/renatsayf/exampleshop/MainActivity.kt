@@ -10,7 +10,10 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +33,10 @@ class MainActivity : AppCompatActivity() {
                 arguments: Bundle?
             ) {
                 when(destination.id) {
-                    com.renatsayf.profile.R.navigation.profile_nav_graph -> {
+                    com.renatsayf.profile.R.id.profileFragment -> {
                         navigationView.visibility = View.VISIBLE
                     }
-                    com.renatsayf.trade.R.navigation.trade_nav_graph -> {
+                    com.renatsayf.trade.R.id.tradeListFragment -> {
                         navigationView.visibility = View.VISIBLE
                     }
                     else -> {

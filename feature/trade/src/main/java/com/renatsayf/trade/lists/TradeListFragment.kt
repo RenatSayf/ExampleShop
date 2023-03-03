@@ -1,34 +1,36 @@
 package com.renatsayf.trade.lists
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
-import com.renatsayf.network.repository.NetRepository
-import com.renatsayf.trade.adapters.*
+import com.renatsayf.trade.R
+import com.renatsayf.trade.adapters.BrandsAdapter
+import com.renatsayf.trade.adapters.CategoryAdapter
+import com.renatsayf.trade.adapters.FlashSalesAdapter
+import com.renatsayf.trade.adapters.LatestDealsAdapter
 import com.renatsayf.trade.databinding.FragmentTradeListBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class TradeListFragment : Fragment() {
 
     private lateinit var binding: FragmentTradeListBinding
 
-    @Inject
-    lateinit var netRepository: NetRepository
-
-    private val viewModel: TradeListViewModel by lazy {
-        val factory = TradeListViewModel.Factory(netRepository)
-        ViewModelProvider(this, factory)[TradeListViewModel::class.java]
-    }
+    private val viewModel: TradeListViewModel by viewModels()
 
     private val categoryAdapter: AsyncListDifferDelegationAdapter<Category> by lazy {
         AsyncListDifferDelegationAdapter(
@@ -62,15 +64,20 @@ class TradeListFragment : Fragment() {
             }
         )
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
+    private val dividerItemDecor9: DividerItemDecoration by lazy {
+        DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL).apply {
+            setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_9dp)!!)
+        }
+    }
+    private val dividerItemDecor12: DividerItemDecoration by lazy {
+        DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL).apply {
+            setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_12dp)!!)
+        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTradeListBinding.inflate(inflater, container, false)
@@ -83,13 +90,20 @@ class TradeListFragment : Fragment() {
         with(binding) {
 
             includeCategory.rvCategoryList.adapter = categoryAdapter
+
             includeListLatest.rvLatest.apply {
-                addItemDecoration(VerticalSpaceDecoration())
+                addItemDecoration(dividerItemDecor12)
                 adapter = latestDealsAdapter
             }
+
             includeFlashLayout.rvFlashSales.apply {
-                addItemDecoration(VerticalSpaceDecoration())
+                addItemDecoration(dividerItemDecor9)
                 adapter = flashSalesAdapter
+            }
+
+            includeListBrands.rvLatest.apply {
+                addItemDecoration(dividerItemDecor12)
+                adapter = brandsAdapter
             }
 
             lifecycleScope.launchWhenStarted {
@@ -106,10 +120,12 @@ class TradeListFragment : Fragment() {
                 viewModel.state.collect { state ->
                     when(state) {
                         TradeListViewModel.State.EmptyData -> {
-
+                            progress.visibility = View.GONE
+                            swProducts.visibility = View.INVISIBLE
                         }
                         TradeListViewModel.State.Loading -> {
-
+                            swProducts.visibility = View.INVISIBLE
+                            progress.visibility = View.VISIBLE
                         }
                         is TradeListViewModel.State.Success -> {
                             val flash = state.flash
@@ -127,6 +143,8 @@ class TradeListFragment : Fragment() {
     private fun handleSuccessState(flash: FlashSales, latest: LatestDeals) {
         with(binding) {
 
+            progress.visibility = View.GONE
+            swProducts.visibility = View.VISIBLE
             includeListLatest.run {
                 includeHeader.tvTitle.text = latest.getListTitle()
                 latestDealsAdapter.items = latest.latest
@@ -156,6 +174,16 @@ class TradeListFragment : Fragment() {
 
     private fun brandsItemClick(product: Product) {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        })
     }
 
 }

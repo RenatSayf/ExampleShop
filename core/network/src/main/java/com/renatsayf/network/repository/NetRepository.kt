@@ -10,9 +10,13 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class NetRepository(
-    private val api: IApi = ApiBuilder.api
+
+@Singleton
+class NetRepository @Inject constructor(
+    private val api: IApi
 ) {
 
     fun getLatestDeals() = flow<Result<LatestDeals>> {

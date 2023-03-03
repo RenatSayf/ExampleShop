@@ -1,29 +1,24 @@
 package com.renatsayf.trade.lists
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
-import com.renatsayf.network.models.product.Product
 import com.renatsayf.network.repository.NetRepository
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+@HiltViewModel
 class TradeListViewModel @Inject constructor(
     private val repository: NetRepository
 ) : ViewModel() {
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory @Inject constructor(private val repository: NetRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == TradeListViewModel::class.java)
-            return TradeListViewModel(repository) as T
-        }
-    }
 
     private var _categoryList = MutableStateFlow<Result<List<Category>>>(Result.failure(Throwable("Empty list"))).apply {
         viewModelScope.launch {

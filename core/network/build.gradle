@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -60,8 +61,12 @@ dependencies {
     //Robolectric
     testImplementation 'org.robolectric:robolectric:4.8.1'
 
-    //Dagger
-    implementation "com.google.dagger:dagger:2.44"
-    kapt "com.google.dagger:dagger-compiler:2.44"
+//    //Dagger
+//    implementation "com.google.dagger:dagger:2.44"
+//    kapt "com.google.dagger:dagger-compiler:2.44"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-android-compiler:2.44"
 
 }
