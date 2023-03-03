@@ -35,7 +35,6 @@
             android:background="@drawable/ic_gender_25x25"/>
 
         <FrameLayout
-            android:id="@+id/layout_ender"
             android:layout_width="49dp"
             android:layout_height="18dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +44,7 @@
             android:background="@drawable/bg_rounded_rectangley_red_49x18">
 
             <TextView
+                android:id="@+id/tv_discount"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:includeFontPadding="false"

@@ -1,5 +1,6 @@
 package com.renatsayf.trade.lists
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.renatsayf.network.models.Category
+import com.renatsayf.network.models.product.FlashSales
+import com.renatsayf.network.models.product.LatestDeals
+import com.renatsayf.network.models.product.Product
 import com.renatsayf.network.repository.NetRepository
-import com.renatsayf.trade.adapters.CategoryAdapter
+import com.renatsayf.trade.adapters.*
 import com.renatsayf.trade.databinding.FragmentTradeListBinding
 import javax.inject.Inject
 
@@ -22,17 +26,42 @@ class TradeListFragment : Fragment() {
     lateinit var netRepository: NetRepository
 
     private val viewModel: TradeListViewModel by lazy {
-
         val factory = TradeListViewModel.Factory(netRepository)
         ViewModelProvider(this, factory)[TradeListViewModel::class.java]
     }
 
-    private val categoryAdapter = AsyncListDifferDelegationAdapter(
-        CategoryAdapter.diffCallback,
-        CategoryAdapter.categoryAdapterDelegate {
-            categoryAdapterItemClick(it)
-        }
-    )
+    private val categoryAdapter: AsyncListDifferDelegationAdapter<Category> by lazy {
+        AsyncListDifferDelegationAdapter(
+            CategoryAdapter.diffCallback,
+            CategoryAdapter.categoryAdapterDelegate {
+                categoryAdapterItemClick(it)
+            }
+        )
+    }
+    private val latestDealsAdapter: AsyncListDifferDelegationAdapter<Product> by lazy {
+        AsyncListDifferDelegationAdapter(
+            LatestDealsAdapter.diffCallback,
+            LatestDealsAdapter().latestDealsAdapterDelegate {
+                latestDealsItemClick(it)
+            }
+        )
+    }
+    private val flashSalesAdapter: AsyncListDifferDelegationAdapter<Product> by lazy {
+        AsyncListDifferDelegationAdapter(
+            FlashSalesAdapter.diffCallback,
+            FlashSalesAdapter().flashSalesAdapterDelegate {
+                flashSalesItemClick(it)
+            }
+        )
+    }
+    private val brandsAdapter: AsyncListDifferDelegationAdapter<Product> by lazy {
+        AsyncListDifferDelegationAdapter(
+            BrandsAdapter.diffCallback,
+            BrandsAdapter().brandsAdapterDelegate {
+                brandsItemClick(it)
+            }
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +82,15 @@ class TradeListFragment : Fragment() {
 
         with(binding) {
 
-            includeCategory.rvCategoryList.apply {
-//                this.setFlat(true)
-//                setInfinite(true)
-//                setIntervalRatio(0.9f)
-            }.adapter = categoryAdapter
+            includeCategory.rvCategoryList.adapter = categoryAdapter
+            includeListLatest.rvLatest.apply {
+                addItemDecoration(VerticalSpaceDecoration())
+                adapter = latestDealsAdapter
+            }
+            includeFlashLayout.rvFlashSales.apply {
+                addItemDecoration(VerticalSpaceDecoration())
+                adapter = flashSalesAdapter
+            }
 
             lifecycleScope.launchWhenStarted {
                 viewModel.categoryList.collect { res ->
@@ -68,7 +101,6 @@ class TradeListFragment : Fragment() {
                         //TODO()
                     }
                 }
-
             }
             lifecycleScope.launchWhenStarted {
                 viewModel.state.collect { state ->
@@ -82,7 +114,9 @@ class TradeListFragment : Fragment() {
                         is TradeListViewModel.State.Success -> {
                             val flash = state.flash
                             val latest = state.latest
-                            latest
+                            if (flash.flash_sale.isNotEmpty() && latest.latest.isNotEmpty()) {
+                                handleSuccessState(flash, latest)
+                            }
                         }
                     }
                 }
@@ -90,7 +124,37 @@ class TradeListFragment : Fragment() {
         }
     }
 
+    private fun handleSuccessState(flash: FlashSales, latest: LatestDeals) {
+        with(binding) {
+
+            includeListLatest.run {
+                includeHeader.tvTitle.text = latest.getListTitle()
+                latestDealsAdapter.items = latest.latest
+            }
+            includeFlashLayout.run {
+                includeHeader.tvTitle.text = flash.getListTitle()
+                flashSalesAdapter.items = flash.flash_sale
+            }
+            includeListBrands.run {
+                includeHeader.tvTitle.text = "Brands"
+                brandsAdapter.items = latest.latest
+            }
+        }
+    }
+
     private fun categoryAdapterItemClick(category: Category) {
+
+    }
+
+    private fun latestDealsItemClick(product: Product) {
+
+    }
+
+    private fun flashSalesItemClick(product: Product) {
+
+    }
+
+    private fun brandsItemClick(product: Product) {
 
     }
 
