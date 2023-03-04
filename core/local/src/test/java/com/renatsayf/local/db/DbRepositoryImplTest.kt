@@ -39,7 +39,7 @@ class DbRepositoryImplTest {
     @Test
     fun addUser() {
 
-        val user = User("xxxxx@yyy.com", "Tom", "Jons", "1234")
+        val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
         runBlocking {
 
             val expectedPassword = "1234"
@@ -60,7 +60,7 @@ class DbRepositoryImplTest {
     @Test
     fun getUser_Succes() {
 
-        val user = User("xxxxx@yyy.com", "Tom", "Jons", "1234")
+        val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
         runBlocking {
 
             val expectedPassword = "1234"
@@ -70,7 +70,7 @@ class DbRepositoryImplTest {
                 }
             }
 
-            val expectedUser = user
+            val expectedUser = User("xxxxx@yyy.com", "Tom", "Jons", "1234")
             repository.getUser("Tom", "1234").collect { res ->
                 res.onSuccess { user ->
                     Assert.assertEquals(expectedUser, user)
@@ -82,7 +82,7 @@ class DbRepositoryImplTest {
     @Test
     fun getUser_Failure() {
 
-        val user = User("xxxxx@yyy.com", "Tom", "Jons", "1234")
+        val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
         runBlocking {
 
             val expectedPassword = "1234"

@@ -10,11 +10,18 @@ class DbRepositoryImpl @Inject constructor(
 ): IDbRepository {
 
     override fun addUser(user: User) = flow<Result<String>> {
+
+        val updatedUser = user.copy(password = "1234")
         try {
-            val res = db.insert(user)
-            if (res > 0) emit(Result.success("1234"))
-            else emit(Result.failure(Throwable("Unknown error")))
+            val res = db.insert(updatedUser)
+            if (res > 0) {
+                emit(Result.success(updatedUser.password))
+            }
+            else {
+                emit(Result.failure(Throwable("Unknown error")))
+            }
         } catch (e: Exception) {
+            e.printStackTrace()
             emit(Result.failure(Throwable("Such a record already exists")))
         }
     }
