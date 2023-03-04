@@ -1,0 +1,103 @@
+package com.renatsayf.local.db
+
+import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.renatsayf.local.models.User
+import kotlinx.coroutines.runBlocking
+import org.junit.*
+import org.junit.runner.RunWith
+
+
+@RunWith(AndroidJUnit4::class)
+class DbRepositoryTest {
+
+    @get:Rule
+    val archRule = InstantTaskExecutorRule()
+
+    private lateinit var dao: AppDao
+    private lateinit var db: AppDataBase
+    private lateinit var repository: DbRepository
+
+    @Before
+    fun setUp() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        db = Room.inMemoryDatabaseBuilder(context, AppDataBase::class.java)
+            .allowMainThreadQueries()
+            .build()
+        dao = db.appDao()
+        repository = DbRepository(dao)
+    }
+
+    @After
+    fun tearDown() {
+        db.close()
+    }
+
+    @Test
+    fun addUser() {
+
+        val user = User("xxxxx@yyy.com", "Tom", "Jons", "123654")
+        runBlocking {
+
+            val expectedLong = 1L
+            repository.addUser(user).collect { res ->
+                res.onSuccess { id ->
+                    Assert.assertEquals(expectedLong, id)
+                }
+            }
+            val expectedString = "Such a record already exists"
+            repository.addUser(user).collect { res ->
+                res.onFailure { err ->
+                    Assert.assertEquals(expectedString, err.message)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun getUser_Succes() {
+
+        val user = User("xxxxx@yyy.com", "Tom", "Jons", "123654")
+        runBlocking {
+
+            val expectedLong = 1L
+            repository.addUser(user).collect { res ->
+                res.onSuccess { id ->
+                    Assert.assertEquals(expectedLong, id)
+                }
+            }
+
+            val expectedUser = user
+            repository.getUser("Tom", "123654").collect { res ->
+                res.onSuccess { user ->
+                    Assert.assertEquals(expectedUser, user)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun getUser_Failure() {
+
+        val user = User("xxxxx@yyy.com", "Tom", "Jons", "123654")
+        runBlocking {
+
+            val expectedLong = 1L
+            repository.addUser(user).collect { res ->
+                res.onSuccess { id ->
+                    Assert.assertEquals(expectedLong, id)
+                }
+            }
+
+            val expectedString = "No such record was found"
+            repository.getUser("XXXXX", "123654").collect { res ->
+                res.onFailure { err ->
+                    Assert.assertEquals(expectedString, err.message)
+                }
+            }
+        }
+    }
+}
