@@ -36,13 +36,13 @@ class SignInViewModel @Inject constructor(
     fun registration(firstName: String, lastName: String, email: String) {
         val user = User(firstName, lastName, email, "")
         viewModelScope.launch {
-            repository.addUser(user).collect { res ->
-                res.onSuccess { password ->
-                    _state.value = State.SuccessSignUp(password)
-                }
-                res.onFailure {
-                    _state.value = State.FailureSignUp(it.message)
-                }
+
+            val res = repository.addUser(user).await()
+            res.onSuccess { password ->
+                _state.value = State.SuccessSignUp(password)
+            }
+            res.onFailure {
+                _state.value = State.FailureSignUp(it.message)
             }
         }
     }

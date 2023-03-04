@@ -43,16 +43,15 @@ class DbRepositoryImplTest {
         runBlocking {
 
             val expectedPassword = "1234"
-            repository.addUser(user).collect { res ->
-                res.onSuccess { password ->
-                    Assert.assertEquals(expectedPassword, password)
-                }
+            val result = repository.addUserAsync(user).await()
+            result.onSuccess { password ->
+                Assert.assertEquals(expectedPassword, password)
             }
+
             val expectedString = "Such a record already exists"
-            repository.addUser(user).collect { res ->
-                res.onFailure { err ->
-                    Assert.assertEquals(expectedString, err.message)
-                }
+            val result2 = repository.addUserAsync(user).await()
+            result2.onFailure { err ->
+                Assert.assertEquals(expectedString, err.message)
             }
         }
     }
@@ -64,10 +63,9 @@ class DbRepositoryImplTest {
         runBlocking {
 
             val expectedPassword = "1234"
-            repository.addUser(user).collect { res ->
-                res.onSuccess { password ->
-                    Assert.assertEquals(expectedPassword, password)
-                }
+            val result = repository.addUserAsync(user).await()
+            result.onSuccess { password ->
+                Assert.assertEquals(expectedPassword, password)
             }
 
             val expectedUser = User("xxxxx@yyy.com", "Tom", "Jons", "1234")
@@ -86,10 +84,9 @@ class DbRepositoryImplTest {
         runBlocking {
 
             val expectedPassword = "1234"
-            repository.addUser(user).collect { res ->
-                res.onSuccess { password ->
-                    Assert.assertEquals(expectedPassword, password)
-                }
+            val result = repository.addUserAsync(user).await()
+            result.onSuccess { password ->
+                Assert.assertEquals(expectedPassword, password)
             }
 
             val expectedString = "No such record was found"
