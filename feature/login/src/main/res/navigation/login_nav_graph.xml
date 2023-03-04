@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_signInFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_trade_nav_graph"
+            app:destination="@id/trade_nav_graph" />
     </fragment>
 
     <include app:graph="@navigation/trade_nav_graph" />

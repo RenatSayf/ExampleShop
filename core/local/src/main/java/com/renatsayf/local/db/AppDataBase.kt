@@ -25,7 +25,7 @@ abstract class AppDataBase: RoomDatabase() {
                 Room.databaseBuilder(
                     context = context.applicationContext,
                     AppDataBase::class.java,
-                    name = null
+                    name = DATABASE
                 ).apply {
                     createFromAsset(DATABASE)
                 }.build()
