@@ -68,6 +68,14 @@ class DbRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getAllUsersAsync(): Deferred<List<User>?> {
+        return coroutineScope {
+            async {
+                db.getAllUsers()
+            }
+        }
+    }
+
     private fun generatePassword(): String {
         return "1234"
     }

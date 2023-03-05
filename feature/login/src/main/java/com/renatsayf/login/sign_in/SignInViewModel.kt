@@ -34,7 +34,12 @@ class SignInViewModel @Inject constructor(
     }
 
     fun registration(firstName: String, lastName: String, email: String) {
-        val user = User(firstName, lastName, email, "")
+        val user = User(
+            firstName = firstName,
+            lastName = lastName,
+            email = email,
+            password = ""
+        )
         viewModelScope.launch {
 
             val res = repository.addUserAsync(user).await()

@@ -5,17 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.renatsayf.login.R
 import com.renatsayf.login.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +35,45 @@ class LoginFragment : Fragment() {
         with(binding) {
 
             btnLogin.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_trade_nav_graph)
+
+                val firstName = etFirstName.text.toString()
+                val password = etPassword.text.toString()
+                viewModel.login(firstName, password)
+            }
+
+            lifecycleScope.launch {
+                viewModel.state.collect { state ->
+                    when(state) {
+                        is LoginViewModel.State.Current -> {
+                            etFirstName.setText(state.firstName)
+                            etPassword.setText(state.password)
+                        }
+                        is LoginViewModel.State.FailureLogin -> {
+                            val message = "The user is not registered"
+                            Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
+                        }
+                        LoginViewModel.State.SuccessLogin -> {
+                            findNavController().navigate(R.id.action_loginFragment_to_trade_nav_graph)
+                        }
+                    }
+                }
             }
         }
+
+    }
+
+    override fun onPause() {
+
+        saveState()
+        super.onPause()
+    }
+
+    private fun saveState() {
+        viewModel.setState(
+            LoginViewModel.State.Current(
+            firstName = binding.etFirstName.text.toString(),
+            password = binding.etPassword.text.toString()
+        ))
     }
 
 }

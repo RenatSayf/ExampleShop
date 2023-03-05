@@ -39,7 +39,12 @@ class DbRepositoryImplTest {
     @Test
     fun addUser() {
 
-        val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
+        val user = User(
+            email = "xxxxx@yyy.com",
+            firstName = "Tom",
+            lastName = "Jons",
+            password = ""
+        )
         runBlocking {
 
             val expectedPassword = "1234"
@@ -59,7 +64,12 @@ class DbRepositoryImplTest {
     @Test
     fun getUser_Success() {
 
-        val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
+        val user = User(
+            email = "xxxxx@yyy.com",
+            firstName = "Tom",
+            lastName = "Jons",
+            password = ""
+        )
         runBlocking {
 
             val expectedPassword = "1234"
@@ -80,7 +90,12 @@ class DbRepositoryImplTest {
     @Test
     fun getUser_Failure() {
 
-        val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
+        val user = User(
+            email = "xxxxx@yyy.com",
+            firstName = "Tom",
+            lastName = "Jons",
+            password = ""
+        )
         runBlocking {
 
             val expectedPassword = "1234"

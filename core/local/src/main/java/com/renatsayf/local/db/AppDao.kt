@@ -20,4 +20,7 @@ interface AppDao {
 
     @Query("SELECT password FROM users WHERE email = :email")
     suspend fun getUserPassword(email: String): String?
+
+    @Query("SELECT * FROM users")
+    suspend fun getAllUsers(): List<User>?
 }

@@ -65,6 +65,9 @@ class SignInFragment : Fragment() {
                 viewModel.state.collect { state ->
                     when(state) {
                         is SignInViewModel.State.Current -> {
+                            etFirstName.setText(state.firstName)
+                            etLastName.setText(state.lastName)
+                            etEmail.setText(state.email)
                         }
                         is SignInViewModel.State.FailureSignUp -> {
                             val message = "User with such email already exists"
