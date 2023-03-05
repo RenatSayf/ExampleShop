@@ -6,9 +6,6 @@ import com.renatsayf.local.models.User
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import java.sql.SQLException
 import javax.inject.Inject
 
 
@@ -21,7 +18,7 @@ class DbRepositoryImpl @Inject constructor(
             async {
                 val updatedUser = user.copy(password = "1234")
                 try {
-                    val id = db.insert(user)
+                    val id = db.insert(updatedUser)
                     if (id > 0) {
                         Result.success(updatedUser.password)
                     }
@@ -40,12 +37,17 @@ class DbRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getUser(name: String, password: String) = flow<Result<User>> {
-        val user = db.get(name, password)
-        user?.let {
-            emit(Result.success(it))
-        }?: run {
-            emit(Result.failure(Throwable("No such record was found")))
+    override suspend fun getUserAsync(name: String, password: String): Deferred<Result<User>> {
+        return coroutineScope {
+            async {
+                val user = db.get(name, password)
+                user?.let {
+                    Result.success(it)
+                }?: run {
+                    Result.failure(Throwable("No such record was found"))
+                }
+            }
         }
     }
+
 }

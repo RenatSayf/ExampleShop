@@ -16,5 +16,5 @@ interface AppDao {
     suspend fun insert(user: User): Long
 
     @Query("SELECT * FROM users WHERE first_name = :firstName AND password = :password")
-    fun get(firstName: String, password: String): User?
+    suspend fun get(firstName: String, password: String): User?
 }

@@ -57,7 +57,7 @@ class DbRepositoryImplTest {
     }
 
     @Test
-    fun getUser_Succes() {
+    fun getUser_Success() {
 
         val user = User("xxxxx@yyy.com", "Tom", "Jons", "")
         runBlocking {
@@ -69,11 +69,11 @@ class DbRepositoryImplTest {
             }
 
             val expectedUser = User("xxxxx@yyy.com", "Tom", "Jons", "1234")
-            repository.getUser("Tom", "1234").collect { res ->
-                res.onSuccess { user ->
-                    Assert.assertEquals(expectedUser, user)
-                }
+            val actualResult = repository.getUserAsync("Tom", "1234").await()
+            actualResult.onSuccess { user ->
+                Assert.assertEquals(expectedUser, user)
             }
+
         }
     }
 
@@ -90,11 +90,11 @@ class DbRepositoryImplTest {
             }
 
             val expectedString = "No such record was found"
-            repository.getUser("XXXXX", "1236").collect { res ->
-                res.onFailure { err ->
-                    Assert.assertEquals(expectedString, err.message)
-                }
+            val actualResult = repository.getUserAsync("XXXXX", "1236").await()
+            actualResult.onFailure { err ->
+                Assert.assertEquals(expectedString, err.message)
             }
+
         }
     }
 }

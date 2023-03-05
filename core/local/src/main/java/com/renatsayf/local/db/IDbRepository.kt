@@ -8,5 +8,5 @@ interface IDbRepository {
 
     suspend fun addUserAsync(user: User): Deferred<Result<String>>
 
-    fun getUser(name: String, password: String): Flow<Result<User>>
+    suspend fun getUserAsync(name: String, password: String): Deferred<Result<User>>
 }

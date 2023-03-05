@@ -37,7 +37,7 @@ class SignInViewModel @Inject constructor(
         val user = User(firstName, lastName, email, "")
         viewModelScope.launch {
 
-            val res = repository.addUser(user).await()
+            val res = repository.addUserAsync(user).await()
             res.onSuccess { password ->
                 _state.value = State.SuccessSignUp(password)
             }
