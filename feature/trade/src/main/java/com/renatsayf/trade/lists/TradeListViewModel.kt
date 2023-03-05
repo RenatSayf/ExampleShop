@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
-import com.renatsayf.network.repository.NetRepository
+import com.renatsayf.network.repository.INetRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TradeListViewModel @Inject constructor(
-    private val repository: NetRepository
+    private val repository: INetRepository
 ) : ViewModel() {
 
     private var _categoryList = MutableStateFlow<Result<List<Category>>>(Result.failure(Throwable("Empty list"))).apply {

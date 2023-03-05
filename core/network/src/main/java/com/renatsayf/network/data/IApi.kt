@@ -2,7 +2,6 @@ package com.renatsayf.network.data
 
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
-import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -1,3 +1,5 @@
+@file:Suppress("MoveVariableDeclarationIntoWhen")
+
 package com.renatsayf.login.sign_in
 
 import android.os.Bundle
@@ -38,10 +40,6 @@ class SignInFragment : Fragment() {
             btnLogin.setOnClickListener {
 
                 findNavController().navigate(R.id.action_signInFragment_to_loginFragment)
-            }
-
-            etEmail.validEmail {
-
             }
 
             btnSignIn.setOnClickListener {

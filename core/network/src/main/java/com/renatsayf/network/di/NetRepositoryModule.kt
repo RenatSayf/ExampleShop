@@ -2,6 +2,7 @@ package com.renatsayf.network.di
 
 import com.renatsayf.network.data.ApiBuilder
 import com.renatsayf.network.data.IApi
+import com.renatsayf.network.repository.INetRepository
 import com.renatsayf.network.repository.NetRepository
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,7 @@ import dagger.hilt.components.SingletonComponent
 object NetRepositoryModule {
 
     @Provides
-    fun provideNetRepository(): NetRepository {
+    fun provideNetRepository(): INetRepository {
         return NetRepository(ApiBuilder.api)
     }
 }
