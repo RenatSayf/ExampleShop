@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 @RunWith(AndroidJUnit4::class)
-class NetRepositoryTest {
+class NetRepositoryImplTest {
 
     @get:Rule
     val archRule = InstantTaskExecutorRule()
@@ -30,10 +30,11 @@ class NetRepositoryTest {
             .create(IApi::class.java)
     }
 
-    private val repository = NetRepository(createRetrofit())
+    private lateinit var repository: INetRepository
 
     @Before
     fun setUp() {
+        repository = NetRepositoryImpl(createRetrofit())
     }
 
     @After

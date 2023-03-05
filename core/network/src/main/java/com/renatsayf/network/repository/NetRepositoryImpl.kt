@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-class NetRepository @Inject constructor(
+class NetRepositoryImpl @Inject constructor(
     private val api: IApi
 ): INetRepository {
 
