@@ -81,16 +81,21 @@ class SignInFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
+    override fun onStart() {
 
-        saveState()
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                requireActivity().finish()
-            }
-        })
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
+        super.onStart()
+    }
+
+    override fun onPause() {
+
+        saveState()
         super.onPause()
     }
 
