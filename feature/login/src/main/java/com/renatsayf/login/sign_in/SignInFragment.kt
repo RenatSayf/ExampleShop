@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -74,7 +75,9 @@ class SignInFragment : Fragment() {
                         is SignInViewModel.State.SuccessSignUp -> {
                             val message = "Your password is ${state.password}"
                             Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-                            findNavController().navigate(R.id.action_signInFragment_to_trade_nav_graph)
+                            //findNavController().navigate(R.id.action_signInFragment_to_trade_nav_graph)
+                            val deepLink = "ExampleShop://login".toUri()
+                            findNavController().navigate(deepLink)
                         }
                     }
                 }

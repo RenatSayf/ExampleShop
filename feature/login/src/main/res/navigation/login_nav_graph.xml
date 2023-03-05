@@ -9,17 +9,21 @@
         android:id="@+id/loginFragment"
         android:name="com.renatsayf.login.back.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_trade_nav_graph"
             app:destination="@id/trade_nav_graph" />
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="ExampleShop://login" />
     </fragment>
 
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.renatsayf.login.sign_in.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
+        tools:layout="@layout/fragment_sign_in"
+        >
         <action
             android:id="@+id/action_signInFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

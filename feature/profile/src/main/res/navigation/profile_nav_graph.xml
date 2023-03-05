@@ -10,4 +10,8 @@
         android:name="com.renatsayf.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/tradeListFragment2"
+        android:name="com.renatsayf.trade.lists.TradeListFragment"
+        android:label="TradeListFragment" />
 </navigation>

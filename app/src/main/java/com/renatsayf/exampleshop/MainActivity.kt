@@ -3,13 +3,16 @@
 package com.renatsayf.exampleshop
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,15 +37,47 @@ class MainActivity : AppCompatActivity() {
             ) {
                 when(destination.id) {
                     com.renatsayf.profile.R.id.profileFragment -> {
-                        navigationView.visibility = View.VISIBLE
+                        navigationView.apply {
+                            menu.findItem(R.id.profile).isChecked = true
+                            visibility = View.VISIBLE
+                        }
                     }
                     com.renatsayf.trade.R.id.tradeListFragment -> {
-                        navigationView.visibility = View.VISIBLE
+                        navigationView.apply {
+                            menu.findItem(R.id.home).isChecked = true
+                            visibility = View.VISIBLE
+                        }
                     }
                     else -> {
                         navigationView.visibility = View.GONE
                     }
                 }
+            }
+        })
+
+        navigationView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+                when(item.itemId) {
+                    R.id.home -> {
+                        item.isChecked = true
+                        navController.navigate(com.renatsayf.trade.R.id.tradeListFragment)
+                    }
+                    R.id.favorite -> {
+                        //item.isChecked = true
+                    }
+                    R.id.basket -> {
+                        //item.isChecked = true
+                    }
+                    R.id.notification -> {
+                        //item.isChecked = true
+                    }
+                    R.id.profile -> {
+                        item.isChecked = true
+                        navController.navigate(com.renatsayf.profile.R.id.profileFragment)
+                    }
+                }
+                return false
             }
         })
 

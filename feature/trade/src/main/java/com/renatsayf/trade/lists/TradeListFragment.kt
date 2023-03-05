@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
@@ -106,6 +107,10 @@ class TradeListFragment : Fragment() {
                 adapter = brandsAdapter
             }
 
+            imgPhoto.setOnClickListener {
+                findNavController().navigate(R.id.action_tradeListFragment_to_profile_nav_graph)
+            }
+
             lifecycleScope.launchWhenStarted {
                 viewModel.categoryList.collect { res ->
                     res.onSuccess { list ->
@@ -137,6 +142,7 @@ class TradeListFragment : Fragment() {
                     }
                 }
             }
+
         }
     }
 

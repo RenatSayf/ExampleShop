@@ -1,7 +1,11 @@
 package com.renatsayf.profile
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ProfileViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+@HiltViewModel
+class ProfileViewModel @Inject constructor() : ViewModel() {
+
 }

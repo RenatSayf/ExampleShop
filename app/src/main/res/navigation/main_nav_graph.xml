@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/mainFragment">
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.renatsayf.exampleshop.MainFragment"
@@ -11,6 +12,31 @@
         <action
             android:id="@+id/action_mainFragment_to_login_nav_graph"
             app:destination="@id/login_nav_graph" />
+        <action
+            android:id="@+id/action_mainFragment_to_profile_nav_graph"
+            app:destination="@id/profile_nav_graph" />
     </fragment>
+
     <include app:graph="@navigation/login_nav_graph" />
+    <include app:graph="@navigation/profile_nav_graph" />
+    <include app:graph="@navigation/trade_nav_graph" />
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.renatsayf.login.sign_in.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="ExampleShop://signIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.renatsayf.login.back.LoginFragment"
+        android:label="LoginFragment">
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="ExampleShop://login" />
+    </fragment>
+
 </navigation>
