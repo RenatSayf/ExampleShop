@@ -40,7 +40,8 @@ class SignInFragment : Fragment() {
 
             btnLogin.setOnClickListener {
 
-                findNavController().navigate(R.id.action_signInFragment_to_loginFragment)
+                val deepLink = "ExampleShop://login".toUri()
+                findNavController().navigate(deepLink)
             }
 
             btnSignIn.setOnClickListener {
@@ -75,8 +76,7 @@ class SignInFragment : Fragment() {
                         is SignInViewModel.State.SuccessSignUp -> {
                             val message = "Your password is ${state.password}"
                             Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-                            //findNavController().navigate(R.id.action_signInFragment_to_trade_nav_graph)
-                            val deepLink = "ExampleShop://login".toUri()
+                            val deepLink = "ExampleShop://trade".toUri()
                             findNavController().navigate(deepLink)
                         }
                     }

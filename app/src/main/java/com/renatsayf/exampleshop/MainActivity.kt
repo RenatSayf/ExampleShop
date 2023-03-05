@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -36,13 +38,13 @@ class MainActivity : AppCompatActivity() {
                 arguments: Bundle?
             ) {
                 when(destination.id) {
-                    com.renatsayf.profile.R.id.profileFragment -> {
+                    R.id.profileFragment -> {
                         navigationView.apply {
                             menu.findItem(R.id.profile).isChecked = true
                             visibility = View.VISIBLE
                         }
                     }
-                    com.renatsayf.trade.R.id.tradeListFragment -> {
+                    R.id.tradeListFragment -> {
                         navigationView.apply {
                             menu.findItem(R.id.home).isChecked = true
                             visibility = View.VISIBLE
@@ -61,7 +63,8 @@ class MainActivity : AppCompatActivity() {
                 when(item.itemId) {
                     R.id.home -> {
                         item.isChecked = true
-                        navController.navigate(com.renatsayf.trade.R.id.tradeListFragment)
+                        val deepLink = "ExampleShop://trade".toUri()
+                        navController.navigate(deepLink)
                     }
                     R.id.favorite -> {
                         //item.isChecked = true
@@ -74,7 +77,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.profile -> {
                         item.isChecked = true
-                        navController.navigate(com.renatsayf.profile.R.id.profileFragment)
+                        val deepLink = "ExampleShop://profile".toUri()
+                        navController.navigate(deepLink)
                     }
                 }
                 return false

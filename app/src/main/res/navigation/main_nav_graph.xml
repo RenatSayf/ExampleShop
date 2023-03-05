@@ -9,17 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="com.renatsayf.exampleshop.MainFragment"
         android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_login_nav_graph"
-            app:destination="@id/login_nav_graph" />
-        <action
-            android:id="@+id/action_mainFragment_to_profile_nav_graph"
-            app:destination="@id/profile_nav_graph" />
     </fragment>
-
-    <include app:graph="@navigation/login_nav_graph" />
-    <include app:graph="@navigation/profile_nav_graph" />
-    <include app:graph="@navigation/trade_nav_graph" />
 
     <fragment
         android:id="@+id/signInFragment"
@@ -37,6 +27,22 @@
         <deepLink
             android:id="@+id/deepLink3"
             app:uri="ExampleShop://login" />
+    </fragment>
+    <fragment
+        android:id="@+id/tradeListFragment"
+        android:name="com.renatsayf.trade.lists.TradeListFragment"
+        android:label="TradeListFragment">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="ExampleShop://trade" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.renatsayf.profile.ProfileFragment"
+        android:label="ProfileFragment">
+        <deepLink
+            android:id="@+id/deepLink4"
+            app:uri="ExampleShop://profile" />
     </fragment>
 
 </navigation>
