@@ -16,11 +16,16 @@ class DbRepositoryImpl @Inject constructor(
     override suspend fun addUserAsync(user: User): Deferred<Result<String>> {
         return coroutineScope {
             async {
-                val updatedUser = user.copy(password = "1234")
+                val updatedUser = user.copy(password = generatePassword())
                 try {
                     val id = db.insert(updatedUser)
                     if (id > 0) {
-                        Result.success(updatedUser.password)
+                        val password = db.getUserPassword(updatedUser.email)
+                        password?.let {
+                            Result.success(it)
+                        }?: run {
+                            Result.failure(Throwable("No such record was found"))
+                        }
                     }
                     else {
                         Result.failure(Throwable("Unknown error"))
@@ -48,6 +53,23 @@ class DbRepositoryImpl @Inject constructor(
                 }
             }
         }
+    }
+
+    override suspend fun getUserPasswordAsync(email: String): Deferred<Result<String?>> {
+        return coroutineScope {
+            async {
+                val password = db.getUserPassword(email)
+                password?.let {
+                    Result.success(it)
+                }?: run {
+                    Result.failure(Throwable("No such record was found"))
+                }
+            }
+        }
+    }
+
+    private fun generatePassword(): String {
+        return "1234"
     }
 
 }
