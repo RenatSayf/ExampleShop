@@ -1,9 +1,13 @@
 package com.renatsayf.login.back
 
 import android.os.Bundle
+import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -40,6 +44,26 @@ class LoginFragment : Fragment() {
                 val firstName = etFirstName.text.toString()
                 val password = etPassword.text.toString()
                 viewModel.login(firstName, password)
+            }
+
+            btnPasswordVisibility.setOnClickListener {
+                val imageView = it as ImageView
+                if (etPassword.inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    etPassword.apply {
+                        inputType = InputType.TYPE_CLASS_TEXT
+                        transformationMethod = PasswordTransformationMethod.getInstance()
+                        setSelection(this.text.length)
+                    }
+                    imageView.setImageResource(R.drawable.ic_visibility_off_grey)
+                }
+                else {
+                    etPassword.apply {
+                        inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        setSelection(this.text.length)
+                    }
+                    imageView.setImageResource(R.drawable.ic_visibility_grey)
+                }
             }
 
             lifecycleScope.launchWhenResumed {
