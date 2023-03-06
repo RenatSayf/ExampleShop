@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
                 viewModel.login(firstName, password)
             }
 
-            lifecycleScope.launch {
+            lifecycleScope.launchWhenResumed {
                 viewModel.state.collect { state ->
                     when(state) {
                         is LoginViewModel.State.Current -> {
