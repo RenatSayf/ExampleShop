@@ -18,6 +18,7 @@ import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
+import com.renatsayf.resourses.extensions.setPopUpMenu
 import com.renatsayf.trade.R
 import com.renatsayf.trade.adapters.BrandsAdapter
 import com.renatsayf.trade.adapters.CategoryAdapter
@@ -113,6 +114,12 @@ class TradeListFragment : Fragment() {
                 findNavController().navigate(deepLink)
             }
 
+            btnUserLocation.setOnClickListener {
+                it.setPopUpMenu(R.menu.menu_location).apply {
+                    this.menu.findItem(R.id.location).title = getDeviceLocation()
+                }.show()
+            }
+
             lifecycleScope.launchWhenStarted {
                 viewModel.categoryList.collect { res ->
                     res.onSuccess { list ->
@@ -192,6 +199,10 @@ class TradeListFragment : Fragment() {
                 requireActivity().finish()
             }
         })
+    }
+
+    fun getDeviceLocation(): String {
+        return "Delhi"
     }
 
 }
