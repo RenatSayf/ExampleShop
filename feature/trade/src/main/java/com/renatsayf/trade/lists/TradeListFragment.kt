@@ -2,7 +2,6 @@
 
 package com.renatsayf.trade.lists
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +19,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.renatsayf.network.models.Category
-import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
@@ -33,7 +30,6 @@ import com.renatsayf.trade.adapters.FlashSalesAdapter
 import com.renatsayf.trade.adapters.LatestDealsAdapter
 import com.renatsayf.trade.databinding.FragmentTradeListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -81,9 +77,9 @@ class TradeListFragment : Fragment() {
             setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_9dp)!!)
         }
     }
-    private val dividerItemDecor12: DividerItemDecoration by lazy {
+    private val dividerItemDecor16: DividerItemDecoration by lazy {
         DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL).apply {
-            setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_12dp)!!)
+            setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_16dp)!!)
         }
     }
     private val hintAdapter: ArrayAdapter<String> by lazy {
@@ -106,7 +102,7 @@ class TradeListFragment : Fragment() {
 
             includeCategory.rvCategoryList.adapter = categoryAdapter
             includeCategory.rvCategoryList.apply {
-                addItemDecoration(dividerItemDecor12)
+                addItemDecoration(dividerItemDecor16)
                 setInfinite(true)
                 setFlat(true)
             }
