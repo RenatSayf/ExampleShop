@@ -6,6 +6,7 @@ import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
+import com.renatsayf.network.models.words.Hint
 import com.renatsayf.network.repository.INetRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -79,6 +80,20 @@ class TradeListViewModel @Inject constructor(
                     }
                 ).collect()
         }
+    }
+
+    @Suppress("OPT_IN_USAGE")
+    fun getHint(): StateFlow<Hint> {
+
+        val flow = MutableStateFlow(Hint(emptyList()))
+        viewModelScope.launch {
+            repository.getWordList().debounce(1000).collect { res ->
+                res.onSuccess {
+                    flow.value = it
+                }
+            }
+        }
+        return flow
     }
 
     init {

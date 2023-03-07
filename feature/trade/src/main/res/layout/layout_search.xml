@@ -18,4 +18,5 @@
     android:textColor="@color/black"
     android:textColorHint="@color/color5B5B5B"
     android:textCursorDrawable="@null"
-    tools:ignore="SpUsage,TouchTargetSizeCheck" />
+    tools:ignore="SpUsage,TouchTargetSizeCheck"
+    android:completionThreshold="1"/>

@@ -4,6 +4,7 @@ import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
+import com.renatsayf.network.models.words.Hint
 import kotlinx.coroutines.flow.Flow
 
 interface INetRepository {
@@ -15,4 +16,6 @@ interface INetRepository {
     fun getBrands(): Flow<Result<Brands>>
 
     fun getCategories(): Flow<List<Category>>
+
+    fun getWordList(): Flow<Result<Hint>>
 }

@@ -5,6 +5,7 @@ import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
+import com.renatsayf.network.models.words.Hint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -57,5 +58,16 @@ class NetRepositoryImpl @Inject constructor(
     override fun getCategories() = flow {
         val list = Category.get()
         emit(list)
+    }
+
+    override fun getWordList(): Flow<Result<Hint>> {
+        return flow {
+            val hint = api.getWordList().body()
+            hint?.let {
+                emit(Result.success(it))
+            }?: run {
+                emit(Result.failure(Throwable("Empty data")))
+            }
+        }
     }
 }
