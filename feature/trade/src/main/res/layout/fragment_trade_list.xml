@@ -109,7 +109,7 @@
 
         <include
             android:id="@+id/include_category"
-            layout="@layout/layout_category_2" />
+            layout="@layout/layout_category" />
 
     </FrameLayout>
 
@@ -121,20 +121,21 @@
         android:layout_marginTop="17dp"
         android:fillViewport="true"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            android:orientation="vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:paddingBottom="92dp"
-            android:isScrollContainer="true"
-            android:orientation="vertical">
+            android:paddingBottom="20dp">
 
             <include
                 android:id="@+id/include_list_latest"
@@ -151,7 +152,7 @@
 
             <include
                 android:id="@+id/include_list_brands"
-                layout="@layout/layout_latest_list"
+                layout="@layout/layout_brands_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp" />

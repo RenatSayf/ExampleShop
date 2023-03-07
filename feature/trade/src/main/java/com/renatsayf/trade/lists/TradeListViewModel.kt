@@ -3,14 +3,12 @@ package com.renatsayf.trade.lists
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.renatsayf.network.models.Category
+import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.repository.INetRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.zip
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,16 +27,30 @@ class TradeListViewModel @Inject constructor(
     }
     val categoryList: StateFlow<Result<List<Category>>> = _categoryList
 
+    private var _brandsList = MutableStateFlow(Brands(emptyList())).apply {
+        viewModelScope.launch {
+            repository.getBrands().collect { res ->
+                res.onSuccess {
+                    value = it
+                }
+            }
+        }
+    }
+    val brandsList: StateFlow<Brands> = _brandsList
+
     sealed class State {
         object Loading: State()
-        data class Success(val flash: FlashSales, val latest: LatestDeals): State()
+        data class Success(
+            val flash: FlashSales,
+            val latest: LatestDeals
+            ): State()
         object EmptyData: State()
     }
 
     private var _state = MutableStateFlow<State>(State.EmptyData)
     val state: StateFlow<State> = _state
 
-    private fun fetchData() {
+    private fun fetchFlashAndLatest() {
 
         viewModelScope.launch {
 
@@ -70,7 +82,7 @@ class TradeListViewModel @Inject constructor(
     }
 
     init {
-        fetchData()
+        fetchFlashAndLatest()
     }
 
 }

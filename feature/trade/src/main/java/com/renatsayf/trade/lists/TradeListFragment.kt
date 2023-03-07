@@ -1,5 +1,8 @@
+@file:Suppress("ObjectLiteralToLambda")
+
 package com.renatsayf.trade.lists
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.renatsayf.network.models.Category
+import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
@@ -93,20 +97,28 @@ class TradeListFragment : Fragment() {
         with(binding) {
 
             includeCategory.rvCategoryList.adapter = categoryAdapter
+            includeCategory.rvCategoryList.apply {
+                addItemDecoration(dividerItemDecor12)
+                setInfinite(true)
+                setFlat(true)
+            }
 
             includeListLatest.rvLatest.apply {
-                addItemDecoration(dividerItemDecor12)
                 adapter = latestDealsAdapter
+                setInfinite(true)
+                setFlat(true)
             }
 
             includeFlashLayout.rvFlashSales.apply {
-                addItemDecoration(dividerItemDecor9)
                 adapter = flashSalesAdapter
+                setInfinite(true)
+                setFlat(true)
             }
 
-            includeListBrands.rvLatest.apply {
-                addItemDecoration(dividerItemDecor12)
+            includeListBrands.rvBrands.apply {
                 adapter = brandsAdapter
+                setInfinite(true)
+                setFlat(true)
             }
 
             imgPhoto.setOnClickListener {
@@ -125,8 +137,13 @@ class TradeListFragment : Fragment() {
                     res.onSuccess { list ->
                         categoryAdapter.items = list
                     }
-                    res.onFailure {
-                        //TODO()
+                }
+            }
+            lifecycleScope.launchWhenStarted {
+                viewModel.brandsList.collect { brands ->
+                    includeListBrands.apply {
+                        includeHeader.tvTitle.text = brands.getListTitle()
+                        brandsAdapter.items = brands.brands
                     }
                 }
             }
@@ -144,7 +161,7 @@ class TradeListFragment : Fragment() {
                         is TradeListViewModel.State.Success -> {
                             val flash = state.flash
                             val latest = state.latest
-                            if (flash.flash_sale.isNotEmpty() && latest.latest.isNotEmpty()) {
+                            if (!flash.flash_sale.isNullOrEmpty() && !latest.latest.isNullOrEmpty()) {
                                 handleSuccessState(flash, latest)
                             }
                         }
@@ -160,17 +177,15 @@ class TradeListFragment : Fragment() {
 
             progress.visibility = View.GONE
             swProducts.visibility = View.VISIBLE
-            includeListLatest.run {
+
+            includeListLatest.apply {
                 includeHeader.tvTitle.text = latest.getListTitle()
                 latestDealsAdapter.items = latest.latest
             }
-            includeFlashLayout.run {
+            includeFlashLayout.apply {
                 includeHeader.tvTitle.text = flash.getListTitle()
                 flashSalesAdapter.items = flash.flash_sale
-            }
-            includeListBrands.run {
-                includeHeader.tvTitle.text = "Brands"
-                brandsAdapter.items = latest.latest
+                flashSalesAdapter.setItems(flash.flash_sale)
             }
         }
     }

@@ -2,8 +2,10 @@ package com.renatsayf.network.repository
 
 import com.renatsayf.network.data.IApi
 import com.renatsayf.network.models.Category
+import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -17,7 +19,10 @@ class NetRepositoryImpl @Inject constructor(
     override fun getLatestDeals() = flow<Result<LatestDeals>> {
         val body = api.getLatestDealsAsync().body()
         body?.let {
-            emit(Result.success(it))
+            if (!it.latest.isNullOrEmpty()) {
+                emit(Result.success(it))
+            }
+            else emit(Result.failure(Throwable("Empty data")))
         }?: run {
             emit(Result.failure(Throwable("Empty data")))
         }
@@ -26,9 +31,26 @@ class NetRepositoryImpl @Inject constructor(
     override fun getFlashSale() = flow<Result<FlashSales>> {
         val body = api.getFlashSalesAsync().body()
         body?.let {
-            emit(Result.success(it))
+            if (!it.flash_sale.isNullOrEmpty()) {
+                emit(Result.success(it))
+            }
+            else emit(Result.failure(Throwable("Empty data")))
         }?: run {
             emit(Result.failure(Throwable("Empty data")))
+        }
+    }
+
+    override fun getBrands(): Flow<Result<Brands>> {
+        return flow {
+            val body = api.getBrandsAsync().body()
+            body?.let {
+                if (!it.brands.isNullOrEmpty()) {
+                    emit(Result.success(it))
+                }
+                else emit(Result.failure(Throwable("Empty data")))
+            }?: run {
+                emit(Result.failure(Throwable("Empty data")))
+            }
         }
     }
 

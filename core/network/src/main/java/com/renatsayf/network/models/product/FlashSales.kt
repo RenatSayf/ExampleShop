@@ -5,7 +5,7 @@ import java.io.Serializable
 import java.util.*
 
 data class FlashSales(
-    val flash_sale: List<Product>
+    val flash_sale: List<Product>?
 ): Serializable, ISales {
 
     override fun getListTitle(): String {

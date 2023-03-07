@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.renatsayf.login.R
 import com.renatsayf.login.databinding.FragmentSignInBinding
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +37,7 @@ class SignInFragment : Fragment() {
 
         with(binding) {
 
-            btnLogin.setOnClickListener {
+            layoutLogin.setOnClickListener {
 
                 val deepLink = "ExampleShop://login".toUri()
                 findNavController().navigate(deepLink)
