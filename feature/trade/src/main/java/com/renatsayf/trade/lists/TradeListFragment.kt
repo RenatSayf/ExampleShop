@@ -72,11 +72,6 @@ class TradeListFragment : Fragment() {
             }
         )
     }
-    private val dividerItemDecor9: DividerItemDecoration by lazy {
-        DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL).apply {
-            setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_9dp)!!)
-        }
-    }
     private val dividerItemDecor16: DividerItemDecoration by lazy {
         DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL).apply {
             setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.item_divider_transparent_16dp)!!)
