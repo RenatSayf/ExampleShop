@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.renatsayf.login.databinding.FragmentSignInBinding
+import com.renatsayf.resourses.extensions.toDeepLink
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,8 +39,7 @@ class SignInFragment : Fragment() {
 
             layoutLogin.setOnClickListener {
 
-                val deepLink = "ExampleShop://login".toUri()
-                findNavController().navigate(deepLink)
+                findNavController().navigate("login".toDeepLink())
             }
 
             btnSignIn.setOnClickListener {
@@ -75,8 +74,7 @@ class SignInFragment : Fragment() {
                         is SignInViewModel.State.SuccessSignUp -> {
                             val message = "Your password is ${state.password}"
                             Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-                            val deepLink = "ExampleShop://trade".toUri()
-                            findNavController().navigate(deepLink)
+                            findNavController().navigate("trade".toDeepLink())
                         }
                     }
                 }

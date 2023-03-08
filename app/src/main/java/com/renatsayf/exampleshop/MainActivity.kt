@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.Navigator
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.renatsayf.resourses.extensions.toDeepLink
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -63,8 +61,7 @@ class MainActivity : AppCompatActivity() {
                 when(item.itemId) {
                     R.id.home -> {
                         item.isChecked = true
-                        val deepLink = "ExampleShop://trade".toUri()
-                        navController.navigate(deepLink)
+                        navController.navigate("trade".toDeepLink())
                     }
                     R.id.favorite -> {
                         //item.isChecked = true
@@ -77,8 +74,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.profile -> {
                         item.isChecked = true
-                        val deepLink = "ExampleShop://profile".toUri()
-                        navController.navigate(deepLink)
+                        navController.navigate("profile".toDeepLink())
                     }
                 }
                 return false

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.renatsayf.login.R
 import com.renatsayf.login.databinding.FragmentLoginBinding
+import com.renatsayf.resourses.extensions.toDeepLink
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -78,8 +77,7 @@ class LoginFragment : Fragment() {
                             Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
                         }
                         LoginViewModel.State.SuccessLogin -> {
-                            val deepLink = "ExampleShop://trade".toUri()
-                            findNavController().navigate(deepLink)
+                            findNavController().navigate("trade".toDeepLink())
                         }
                     }
                 }
