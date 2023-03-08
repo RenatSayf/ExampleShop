@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="Trade by"
+            android:text="@string/text_trade_by"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -70,11 +70,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/img_photo"
                 app:layout_constraintEnd_toEndOf="@id/img_photo"
                 android:layout_marginTop="8dp"
-                android:text="Location"
+                android:text="@string/text_location"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="10sp"
                 android:drawableEnd="@drawable/ic_arrow_down_grey"
-                />
+                tools:ignore="SmallSp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

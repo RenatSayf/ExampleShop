@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="42dp"
@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in"
+            android:text="@string/text_sign_in"
             style="@style/HeadTextView"
             />
 
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="29dp"
             android:layout_marginTop="60dp"
-            android:hint="First name"
+            android:hint="@string/text_first_name"
             style="@style/SignInEditText"
             />
 
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="29dp"
             android:layout_marginTop="30dp"
-            android:hint="Last name"
+            android:hint="@string/text_last_name"
             style="@style/SignInEditText"
             />
 
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="29dp"
             android:layout_marginTop="30dp"
-            android:hint="Email"
+            android:hint="@string/text_email"
             android:inputType="textEmailAddress"
             style="@style/SignInEditText"
             />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_ripple_sign_in_btn"
-            android:text="Sign in"
+            android:text="@string/text_sign_in"
             style="@style/SignInButton"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,12 +74,12 @@
                 android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="Already have an account?"
+                android:text="@string/tex_already_have_account"
                 android:textColor="@color/color_helper_text"
                 android:textSize="10sp"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center_vertical"
-                />
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/btn_login"
@@ -89,12 +89,12 @@
                 android:paddingEnd="10dp"
                 app:layout_constraintStart_toEndOf="@+id/tv_is_account"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="Log in"
+                android:text="@string/text_log_in"
                 android:textSize="10sp"
                 android:textAllCaps="false"
                 android:textColor="@color/color_text_log_in"
                 android:gravity="center_vertical"
-                />
+                tools:ignore="SmallSp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Sign in with Google"
+            android:text="@string/text_sign_in_with_google"
             android:background="@drawable/bg_ripple_borderless_btn"
             android:drawableStart="@drawable/ic_google_logo"
             android:theme="@style/GoogleSignInButton"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Sign in with Apple"
+            android:text="@string/text_sign_in_with_apple"
             android:background="@drawable/bg_ripple_borderless_btn"
             android:drawableStart="@drawable/ic_apple_logo"
             android:theme="@style/GoogleSignInButton"

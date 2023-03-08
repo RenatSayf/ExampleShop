@@ -23,6 +23,7 @@ import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
 import com.renatsayf.resourses.extensions.setPopUpMenu
+import com.renatsayf.resourses.extensions.toDeepLink
 import com.renatsayf.trade.R
 import com.renatsayf.trade.adapters.BrandsAdapter
 import com.renatsayf.trade.adapters.CategoryAdapter
@@ -122,7 +123,7 @@ class TradeListFragment : Fragment() {
 
             imgPhoto.setOnClickListener {
                 val deepLink = "ExampleShop://profile".toUri()
-                findNavController().navigate(deepLink)
+                findNavController().navigate("profile".toDeepLink())
             }
 
             btnUserLocation.setOnClickListener {

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Trade</string>
+    <string name="text_trade_by">Trade by</string>
+    <string name="text_location">Location</string>
+    <string name="text_view_all">View all</string>
+    <string name="text_search_hint">What are you looking for ?</string>
 </resources>

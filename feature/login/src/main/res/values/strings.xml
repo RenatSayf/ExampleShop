@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Login</string>
+    <string name="text_sign_in">Sign in</string>
+    <string name="text_first_name">First name</string>
+    <string name="text_last_name">Last name</string>
+    <string name="text_email">Email</string>
+    <string name="tex_already_have_account">Already have an account?</string>
+    <string name="text_log_in">Log in</string>
+    <string name="text_sign_in_with_google">Sign in with Google</string>
+    <string name="text_sign_in_with_apple">Sign in with Apple</string>
+    <string name="text_welcome_back">Welcome back</string>
+    <string name="text_password">Password</string>
+    <string name="text_login">Login</string>
 </resources>
