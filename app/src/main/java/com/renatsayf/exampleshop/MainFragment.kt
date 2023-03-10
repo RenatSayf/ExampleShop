@@ -12,6 +12,5 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         findNavController().navigate("signIn".toDeepLink())
-        //findNavController().navigate("details".toDeepLink())
     }
 }
