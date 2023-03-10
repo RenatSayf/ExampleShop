@@ -11,7 +11,7 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //findNavController().navigate("signIn".toDeepLink())
-        findNavController().navigate("details".toDeepLink())
+        findNavController().navigate("signIn".toDeepLink())
+        //findNavController().navigate("details".toDeepLink())
     }
 }

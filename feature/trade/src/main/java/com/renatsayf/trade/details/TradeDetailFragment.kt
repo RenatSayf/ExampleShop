@@ -1,11 +1,13 @@
 package com.renatsayf.trade.details
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -13,6 +15,7 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +29,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.renatsayf.network.models.details.ProductDetails
 import com.renatsayf.resourses.extensions.dp
+import com.renatsayf.resourses.extensions.toDeepLink
 import com.renatsayf.trade.BuildConfig
 import com.renatsayf.trade.R
 import com.renatsayf.trade.adapters.ColorListAdapter
@@ -44,16 +48,14 @@ class TradeDetailFragment : Fragment() {
     private val productImageAdapter: AsyncListDifferDelegationAdapter<String> by lazy {
         AsyncListDifferDelegationAdapter(
             ProductImageAdapter.diffCallback,
-            ProductImageAdapter().productImageDelegate {
-                setProductIndicator(it)
-            }
+            ProductImageAdapter().productImageDelegate()
         )
     }
     private val productColorAdapter: AsyncListDifferDelegationAdapter<String> by lazy {
         AsyncListDifferDelegationAdapter(
             ColorListAdapter.diffCallback,
             ColorListAdapter().productColorDelegate {
-
+                colorAdapterItemClick(it)
             }
         )
     }
@@ -77,6 +79,7 @@ class TradeDetailFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -95,24 +98,40 @@ class TradeDetailFragment : Fragment() {
                 })
             }
 
-
-
             rvColors.apply {
                 adapter = productColorAdapter
                 addItemDecoration(colorItemsDivider)
+            }
+
+            layoutToCart.setOnClickListener {
+                findNavController().navigate("cart".toDeepLink())
+            }
+
+            btnMinus.setOnClickListener {
+                val balance = tvBalance.text.toString().replace("#", "").trim().toDouble()
+                val price = tvPrice.text.toString().replace("$", "").trim().toDouble()
+                val newBalance = balance - price
+                if (newBalance >= viewModel.getBalance()) tvBalance.text = "#$newBalance"
+            }
+            btnPlus.setOnClickListener {
+                val balance = tvBalance.text.toString().replace("#", "").trim().toDouble()
+                val price = tvPrice.text.toString().replace("$", "").trim().toDouble()
+                val newBalance = balance + price
+                tvBalance.text = "#$newBalance"
             }
 
             lifecycleScope.launchWhenResumed {
                 viewModel.state.collect { state ->
                     when(state) {
                         is TradeDetailViewModel.State.DataFailure -> {
+                            progress.visibility = View.GONE
                             Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
                         }
                         is TradeDetailViewModel.State.DataSuccess -> {
                             handleSuccessData(state.details)
                         }
                         TradeDetailViewModel.State.Loading -> {
-
+                            progress.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -124,6 +143,8 @@ class TradeDetailFragment : Fragment() {
     private fun handleSuccessData(details: ProductDetails) {
 
         with(binding) {
+
+            progress.visibility = View.GONE
             productImageAdapter.items = details.imageUrls
             tvProductName.text = details.name
             tvDescription.text = details.description
@@ -134,6 +155,9 @@ class TradeDetailFragment : Fragment() {
             tvStars.text = details.rating.toString()
             val displayReviews = "(${details.reviews} reviews)"
             tvReviews.text = displayReviews
+
+            val displayBalance = "#${viewModel.getBalance()}"
+            tvBalance.text = displayBalance
 
             productColorAdapter.items = details.colors
 
@@ -208,6 +232,23 @@ class TradeDetailFragment : Fragment() {
                 if (BuildConfig.DEBUG) e.printStackTrace()
             }
             Unit
+        }
+    }
+
+    private fun colorAdapterItemClick(color: String) {
+        Snackbar.make(binding.root, "Selected color $color", Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().popBackStack()
+            }
+        })
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

@@ -52,5 +52,13 @@
             android:id="@+id/deepLink5"
             app:uri="ExampleShop://details" />
     </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.renatsayf.trade.cart.CartFragment"
+        android:label="CartFragment">
+        <deepLink
+            android:id="@+id/deepLink6"
+            app:uri="ExampleShop://cart" />
+    </fragment>
 
 </navigation>

@@ -21,7 +21,7 @@ class ProductImageAdapter {
         }
     }
 
-    fun productImageDelegate(onItemClick: (Int) -> Unit) =
+    fun productImageDelegate() =
         adapterDelegateViewBinding<String, String, ItemProductPhotoBinding>({layoutInflater, parent ->
             ItemProductPhotoBinding.inflate(layoutInflater, parent, false)
         }) {
@@ -30,10 +30,6 @@ class ProductImageAdapter {
                 with(binding) {
 
                     Glide.with(context).load(item.toUri()).into(imgProductPhoto)
-                    imgProductPhoto.setOnClickListener {
-                        //onItemClick(adapterPosition)
-                    }
-                    //onItemClick.invoke(adapterPosition)
                 }
             }
         }

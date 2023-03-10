@@ -1,311 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".details.TradeDetailFragment"
-        android:background="@color/color_screen_bg">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_images"
-            android:layout_width="match_parent"
-            android:layout_height="279dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="26sp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            tools:listitem="@layout/item_product_photo"
-            tools:itemCount="3"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layout_indicator"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/rv_images"
-            android:layout_marginTop="35dp">
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            tools:context=".details.TradeDetailFragment"
+            android:background="@color/color_screen_bg">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="14dp"
-            android:padding="8dp"
-            android:background="@drawable/bg_ripple_circle_transparent"
-            android:src="@drawable/ic_chevron_left"
-            tools:ignore="ContentDescription" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_images"
+                android:layout_width="match_parent"
+                android:layout_height="279dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="26sp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                tools:listitem="@layout/item_product_photo"
+                tools:itemCount="3"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/rv_images"
-            android:layout_marginEnd="34dp"
-            android:layout_marginBottom="28dp"
-            android:gravity="center"
-            android:background="@drawable/ic_vertical_rect_gray"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:background="@drawable/bg_ripple_circle_transparent"
-                android:src="@drawable/ic_favorite"
-                tools:ignore="ContentDescription" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:background="@drawable/bg_ripple_circle_transparent"
-                android:src="@drawable/ic_devider"
-                tools:ignore="ContentDescription" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:background="@drawable/bg_ripple_circle_transparent"
-                android:src="@drawable/ic_share"
-                tools:ignore="ContentDescription" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layout_product_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:orientation="horizontal"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/layout_indicator"
-            tools:layout_editor_absoluteX="0dp">
-
-            <TextView
-                android:id="@+id/tv_product_name"
-                android:layout_width="186dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="start"
-                android:lineSpacingExtra="10dp"
-                android:textColor="@color/color_head_screen"
-                android:textSize="17sp"
-                tools:text="New balance Sneakers" />
-
-            <TextView
-                android:id="@+id/tv_price"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_indicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="end"
-                android:textColor="@color/color_head_screen"
-                android:textSize="17sp"
-                tools:text="$ 22,50" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/rv_images"
+                android:layout_marginTop="35dp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_product_name"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="16dp"
-            android:gravity="start"
-            tools:text="Features waterproof, fire, air resistant shoes. all changed when the country of fire attacked"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="9sp"
-            android:textColor="@color/color_808080"/>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layout_rating"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description"
-            android:layout_marginTop="21dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            >
-
-            <TextView
-                android:id="@+id/tv_stars"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
-                tools:text="3.9"
-                android:fontFamily="@font/poppins_semibold"
-                android:textSize="9sp"
-                android:textColor="@color/color_head_screen"
-                android:drawableStart="@drawable/ic_star_gold"
-                android:includeFontPadding="false"
-                android:drawablePadding="2dp"
-                />
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/rv_images"
+                android:layout_marginEnd="34dp"
+                android:layout_marginBottom="28dp"
+                android:gravity="center"
+                android:background="@drawable/ic_vertical_rect_gray">
 
-            <TextView
-                android:id="@+id/tv_reviews"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    android:src="@drawable/ic_favorite"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    android:src="@drawable/ic_devider"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    android:src="@drawable/ic_share"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:orientation="horizontal"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_indicator"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/tv_product_name"
+                    android:layout_width="186dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="start"
+                    android:lineSpacingExtra="10dp"
+                    android:textColor="@color/color_head_screen"
+                    android:textSize="17sp"
+                    tools:text="New balance Sneakers" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="end"
+                    android:textColor="@color/color_head_screen"
+                    android:textSize="17sp"
+                    tools:text="$ 22,50" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="231dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_product_name"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
                 android:gravity="start"
-                android:layout_marginStart="2dp"
-                tools:text="(4000 reviews)"
+                tools:text="Features waterproof, fire, air resistant shoes. all changed when the country of fire attacked"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="9sp"
-                android:textColor="@color/color_808080"/>
+                android:textColor="@color/color_808080" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description"
+                android:layout_marginTop="21dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp">
 
-        <TextView
-            android:id="@+id/tv_color_title"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_rating"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="16dp"
-            android:gravity="start"
-            android:text="Color:"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="10sp"
-            android:textColor="@color/color_737373"/>
+                <TextView
+                    android:id="@+id/tv_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    tools:text="3.9"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="9sp"
+                    android:textColor="@color/color_head_screen"
+                    android:drawableStart="@drawable/ic_star_gold"
+                    android:includeFontPadding="false"
+                    android:drawablePadding="2dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_colors"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/tv_color_title"
-            app:layout_constraintBottom_toTopOf="@+id/v_bottom_space"
-            app:layout_constraintVertical_bias="0"
-            android:layout_marginTop="11dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            tools:listitem="@layout/item_color_box"
-            tools:itemCount="3"
-            >
-        </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/tv_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginStart="2dp"
+                    tools:text="(4000 reviews)"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="9sp"
+                    android:textColor="@color/color_808080" />
 
-        <View
-            android:id="@+id/v_bottom_bar"
-            android:layout_width="match_parent"
-            android:layout_height="117dp"
-            app:layout_constraintTop_toBottomOf="@id/rv_colors"
-            app:layout_constraintBottom_toTopOf="@id/v_bottom_space"
-            app:layout_constraintVertical_bias="1"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_32_corners_dark_181726"/>
-
-        <TextView
-            android:id="@+id/tv_quantity_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="14dp"
-            android:gravity="start"
-            android:text="Quantity:"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="10sp"
-            android:textColor="@color/color_737373"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_minus"
-            android:layout_width="38dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_quantity_title"
-            android:background="@drawable/bg_ripple_sign_in_btn"
-            android:text="-"
-            style="@style/SignInButton"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_plus"
-            android:layout_width="38dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@+id/btn_minus"
-            app:layout_constraintTop_toBottomOf="@id/tv_quantity_title"
-            android:background="@drawable/bg_ripple_sign_in_btn"
-            android:text="+"
-            style="@style/SignInButton"/>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="170dp"
-            android:layout_height="44dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/bg_ripple_sign_in_btn">
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_color_title"
+                android:layout_width="231dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="#2,500"
+                app:layout_constraintTop_toBottomOf="@+id/layout_rating"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:gravity="start"
+                android:text="Color:"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="8sp"
-                android:textColor="@color/color_99A0FF"
-                android:includeFontPadding="false"/>
+                android:textSize="10sp"
+                android:textColor="@color/color_737373" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/tv_color_title"
+                app:layout_constraintBottom_toTopOf="@+id/v_bottom_space"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="11dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                tools:listitem="@layout/item_color_box"
+                tools:itemCount="3" />
+
+            <View
+                android:id="@+id/v_bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="117dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_colors"
+                app:layout_constraintBottom_toTopOf="@id/v_bottom_space"
+                app:layout_constraintVertical_bias="1"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_32_corners_dark_181726" />
 
             <TextView
+                android:id="@+id/tv_quantity_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="ADD TO CART"
-                android:textAllCaps="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="14dp"
+                android:gravity="start"
+                android:text="Quantity:"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="8sp"
-                android:textColor="@color/white"
-                android:includeFontPadding="false"/>
+                android:textSize="10sp"
+                android:textColor="@color/color_737373" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_minus"
+                android:layout_width="38dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_quantity_title"
+                android:background="@drawable/bg_ripple_sign_in_btn"
+                android:text="-"
+                style="@style/SignInButton" />
 
-        <View
-            android:id="@+id/v_bottom_space"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            app:layout_constraintTop_toBottomOf="@+id/v_bottom_bar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/color_181726"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_plus"
+                android:layout_width="38dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@+id/btn_minus"
+                app:layout_constraintTop_toBottomOf="@id/tv_quantity_title"
+                android:background="@drawable/bg_ripple_sign_in_btn"
+                android:text="+"
+                style="@style/SignInButton" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_to_cart"
+                android:layout_width="170dp"
+                android:layout_height="44dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_ripple_sign_in_btn">
+
+                <TextView
+                    android:id="@+id/tv_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    tools:text="#2,500"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="8sp"
+                    android:textColor="@color/color_99A0FF"
+                    android:includeFontPadding="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/v_bottom_bar"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="ADD TO CART"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="8sp"
+                    android:textColor="@color/white"
+                    android:includeFontPadding="false" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:id="@+id/v_bottom_space"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                app:layout_constraintTop_toBottomOf="@+id/v_bottom_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/color_181726" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:padding="8dp"
+        android:background="@drawable/bg_ripple_circle_transparent"
+        android:src="@drawable/ic_chevron_left"
+        tools:ignore="ContentDescription" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/color_sign_in_btn"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+</FrameLayout>

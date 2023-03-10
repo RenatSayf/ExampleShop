@@ -157,6 +157,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp" />
 
+            <View
+                android:id="@+id/v_bottom_space"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>

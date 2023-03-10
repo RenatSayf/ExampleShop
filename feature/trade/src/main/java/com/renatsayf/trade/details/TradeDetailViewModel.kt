@@ -43,6 +43,10 @@ class TradeDetailViewModel @Inject constructor(
         }
     }
 
+    fun getBalance(): Double {
+        return 2500.0
+    }
+
     init {
         getProductDetails()
     }
