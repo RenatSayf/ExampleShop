@@ -30,6 +30,10 @@ class FlashSalesAdapter : LatestDealsAdapter() {
                     tvPrice.text = item.price.toString()
 
                     Glide.with(context).load(item.image_url).into(ivProductImage)
+
+                    layoutCard.setOnClickListener {
+                        itemClickListener.invoke(item)
+                    }
                 }
             }
         }

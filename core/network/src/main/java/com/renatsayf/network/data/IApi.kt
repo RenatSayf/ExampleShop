@@ -1,5 +1,6 @@
 package com.renatsayf.network.data
 
+import com.renatsayf.network.models.details.ProductDetails
 import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
@@ -20,4 +21,7 @@ interface IApi {
 
     @GET("4c9cd822-9479-4509-803d-63197e5a9e19")
     suspend fun getWordList(): Response<Hint>
+
+    @GET("f7f99d04-4971-45d5-92e0-70333383c239")
+    suspend fun getProductDetails(): Response<ProductDetails>
 }

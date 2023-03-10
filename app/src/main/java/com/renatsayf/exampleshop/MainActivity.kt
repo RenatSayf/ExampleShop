@@ -48,6 +48,12 @@ class MainActivity : AppCompatActivity() {
                             visibility = View.VISIBLE
                         }
                     }
+                    R.id.tradeDetailFragment -> {
+                        navigationView.apply {
+                            menu.findItem(R.id.home).isChecked = true
+                            visibility = View.VISIBLE
+                        }
+                    }
                     else -> {
                         navigationView.visibility = View.GONE
                     }

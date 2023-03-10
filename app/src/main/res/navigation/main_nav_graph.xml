@@ -44,5 +44,13 @@
             android:id="@+id/deepLink4"
             app:uri="ExampleShop://profile" />
     </fragment>
+    <fragment
+        android:id="@+id/tradeDetailFragment"
+        android:name="com.renatsayf.trade.details.TradeDetailFragment"
+        android:label="TradeDetailFragment">
+        <deepLink
+            android:id="@+id/deepLink5"
+            app:uri="ExampleShop://details" />
+    </fragment>
 
 </navigation>

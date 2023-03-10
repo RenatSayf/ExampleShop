@@ -5,6 +5,8 @@ package com.renatsayf.network.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.runner.AndroidJUnit4
 import com.renatsayf.network.data.IApi
+import com.renatsayf.network.models.details.ProductDetails
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -115,6 +117,48 @@ class NetRepositoryImplTest {
         runBlocking {
             repository.getLatestDeals().collect {
                 Assert.assertTrue(it.isSuccess)
+            }
+        }
+    }
+
+    @Test
+    fun getProductDetails() {
+
+        val body = """{
+  "name": "Reebok Classic",
+  "description": "Shoes inspired by 80s running shoes are still relevant today",
+  "rating": 4.3,
+  "number_of_reviews": 4000,
+  "price": 24,
+  "colors": [
+    "#ffffff",
+    "#b5b5b5",
+    "#000000"
+  ],
+  "image_urls": [
+    "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3613ebaf6ed24a609818ac63000250a3_9366/Classic_Leather_Shoes_-_Toddler_White_FZ2093_01_standard.jpg",
+    "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/a94fbe7d8dfb4d3bbaf9ac63000135ed_9366/Classic_Leather_Shoes_-_Toddler_White_FZ2093_03_standard.jpg",
+    "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/1fd1b80693d34f2584b0ac6300034598_9366/Classic_Leather_Shoes_-_Toddler_White_FZ2093_05_standard.jpg"
+  ]
+}"""
+
+        val response = MockResponse().apply {
+            setResponseCode(200)
+            setBody(body)
+        }
+        server.enqueue(response)
+
+        runBlocking {
+
+            repository.getProductDetails().collect { res ->
+                res.onSuccess { details ->
+                    Assert.assertTrue(true)
+                    Assert.assertEquals("Reebok Classic", details.name)
+                    Assert.assertEquals(3, details.imageUrls.size)
+                }
+                res.onFailure {
+                    Assert.assertTrue(false)
+                }
             }
         }
     }

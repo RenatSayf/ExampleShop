@@ -203,7 +203,7 @@ class TradeListFragment : Fragment() {
     }
 
     private fun latestDealsItemClick(product: Product) {
-
+        findNavController().navigate("details".toDeepLink())
     }
 
     private fun flashSalesItemClick(product: Product) {
@@ -224,7 +224,7 @@ class TradeListFragment : Fragment() {
         })
     }
 
-    fun getDeviceLocation(): String {
+    private fun getDeviceLocation(): String {
         return "Delhi"
     }
 

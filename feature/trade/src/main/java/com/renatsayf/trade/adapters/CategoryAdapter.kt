@@ -32,7 +32,6 @@ object CategoryAdapter {
         override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem == newItem
         }
-
     }
 
 

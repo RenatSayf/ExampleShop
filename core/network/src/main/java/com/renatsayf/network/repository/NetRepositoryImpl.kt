@@ -2,6 +2,7 @@ package com.renatsayf.network.repository
 
 import com.renatsayf.network.data.IApi
 import com.renatsayf.network.models.Category
+import com.renatsayf.network.models.details.ProductDetails
 import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
@@ -64,6 +65,17 @@ class NetRepositoryImpl @Inject constructor(
         return flow {
             val hint = api.getWordList().body()
             hint?.let {
+                emit(Result.success(it))
+            }?: run {
+                emit(Result.failure(Throwable("Empty data")))
+            }
+        }
+    }
+
+    override fun getProductDetails(): Flow<Result<ProductDetails>> {
+        return flow {
+            val details = api.getProductDetails().body()
+            details?.let {
                 emit(Result.success(it))
             }?: run {
                 emit(Result.failure(Throwable("Empty data")))
