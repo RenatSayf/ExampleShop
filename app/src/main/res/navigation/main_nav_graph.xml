@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/mainFragment">
-
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.renatsayf.exampleshop.MainFragment"
-        android:label="MainFragment" >
-    </fragment>
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/signInFragment"
