@@ -2,3 +2,4 @@
 /src/main/assets/INSERT OR ABORT INTO users.sql
 /src/main/assets/SELECT FROM users.sql
 /src/main/assets/SELECT password FROM users.sql
+/src/main/assets/Update user.sql

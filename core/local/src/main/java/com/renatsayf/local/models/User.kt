@@ -19,5 +19,8 @@ data class User(
     override val lastName: String?,
 
     @ColumnInfo(name = "password")
-    override val password: String
+    override val password: String,
+
+    @ColumnInfo(name = "photo_path")
+    override val photoPath: String? = null
 ): IUser

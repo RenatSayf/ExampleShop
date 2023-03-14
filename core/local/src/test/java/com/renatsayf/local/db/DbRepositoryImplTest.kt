@@ -112,4 +112,39 @@ class DbRepositoryImplTest {
 
         }
     }
+
+    @Test
+    fun updateUser_Success() {
+
+        val user = User(
+            email = "xxxxx@yyy.com",
+            firstName = "Tom",
+            lastName = "Jons",
+            password = ""
+        )
+
+        runBlocking {
+
+            val expectedPassword = "1234"
+            val result = repository.addUserAsync(user).await()
+            result.onSuccess { password ->
+                Assert.assertEquals(expectedPassword, password)
+            }
+
+            val updatedUser = user.copy(photoPath = "Tom.png")
+            val result2 = repository.updateUserAsync(updatedUser).await()
+            result2.onSuccess {
+                val result3 = repository.getUserAsync(updatedUser.firstName, updatedUser.password).await()
+                result3.onSuccess {
+                    Assert.assertEquals("Tom.png", it.photoPath)
+                }
+                result3.onFailure {
+                    Assert.assertTrue(false)
+                }
+            }
+            result2.onFailure {
+                Assert.assertTrue(false)
+            }
+        }
+    }
 }

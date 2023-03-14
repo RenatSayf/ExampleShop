@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.renatsayf.local.utils.saveUserToPref
 import com.renatsayf.login.databinding.FragmentSignInBinding
 import com.renatsayf.resourses.extensions.toDeepLink
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
@@ -72,9 +73,11 @@ class SignInFragment : Fragment() {
                             Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
                         }
                         is SignInViewModel.State.SuccessSignUp -> {
-                            val message = "Your password is ${state.password}"
+                            val message = "Your password is ${state.user.password}"
                             Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-                            findNavController().navigate("trade".toDeepLink())
+                            this@SignInFragment.saveUserToPref(state.user, onSaved = {
+                                findNavController().navigate("trade".toDeepLink())
+                            })
                         }
                     }
                 }

@@ -1,9 +1,6 @@
 package com.renatsayf.local.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.renatsayf.local.models.User
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +11,9 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(user: User): Long
+
+    @Update(onConflict = OnConflictStrategy.REPLACE, entity = User::class)
+    suspend fun update(user: User): Int
 
     @Query("SELECT * FROM users WHERE first_name = :firstName AND password = :password")
     suspend fun get(firstName: String, password: String): User?
