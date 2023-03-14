@@ -1,7 +1,11 @@
 package com.renatsayf.trade.lists
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.renatsayf.local.db.IDbRepository
+import com.renatsayf.local.models.User
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.Brands
 import com.renatsayf.network.models.product.FlashSales
@@ -16,8 +20,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TradeListViewModel @Inject constructor(
-    private val repository: INetRepository
+    private val repository: INetRepository,
+    private var db: IDbRepository
 ) : ViewModel() {
+
+    private var _user = MutableLiveData<User?>(null)
+    val user: LiveData<User?> = _user
+
+    fun getUserData(name: String, password: String) {
+
+        viewModelScope.launch {
+            val result = db.getUserAsync(name, password).await()
+            result.onSuccess { user ->
+                _user.value = user
+            }
+        }
+    }
 
     private var _categoryList = MutableStateFlow<Result<List<Category>>>(Result.failure(Throwable("Empty list"))).apply {
         viewModelScope.launch {

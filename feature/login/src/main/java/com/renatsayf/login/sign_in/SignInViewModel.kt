@@ -22,7 +22,7 @@ class SignInViewModel @Inject constructor(
             val lastName: String = "",
             val email: String = ""
         ): State()
-        data class SuccessSignUp(val password: String): State()
+        data class SuccessSignUp(val user: User): State()
         data class FailureSignUp(val message: String?): State()
     }
 
@@ -38,13 +38,15 @@ class SignInViewModel @Inject constructor(
             firstName = firstName,
             lastName = lastName,
             email = email,
-            password = ""
+            password = "",
+            photoPath = null
         )
         viewModelScope.launch {
 
             val res = repository.addUserAsync(user).await()
             res.onSuccess { password ->
-                _state.value = State.SuccessSignUp(password)
+                val newUser = user.copy(password = password)
+                _state.value = State.SuccessSignUp(newUser)
             }
             res.onFailure {
                 _state.value = State.FailureSignUp(it.message)

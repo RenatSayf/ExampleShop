@@ -20,7 +20,7 @@ class LoginViewModel @Inject constructor(
             val firstName: String = "",
             val password: String = ""
         ): State()
-        object SuccessLogin: State()
+        data class SuccessLogin(val user: User): State()
         data class FailureLogin(val message: String?): State()
     }
 
@@ -35,8 +35,8 @@ class LoginViewModel @Inject constructor(
 
         viewModelScope.launch {
             val result = repository.getUserAsync(firstName, password).await()
-            result.onSuccess {
-                _state.value = State.SuccessLogin
+            result.onSuccess { user ->
+                _state.value = State.SuccessLogin(user)
             }
             result.onFailure { t ->
                 _state.value = State.FailureLogin(t.message)

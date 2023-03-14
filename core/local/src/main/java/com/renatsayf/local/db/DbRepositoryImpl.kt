@@ -42,6 +42,20 @@ class DbRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateUserAsync(user: User): Deferred<Result<Int>> {
+        return coroutineScope {
+            async {
+                val quantity = db.update(user)
+                if (quantity > 0) {
+                    Result.success(quantity)
+                }
+                else {
+                    Result.failure(Throwable("No such record was found"))
+                }
+            }
+        }
+    }
+
     override suspend fun getUserAsync(name: String, password: String): Deferred<Result<User>> {
         return coroutineScope {
             async {

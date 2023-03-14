@@ -17,10 +17,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.renatsayf.local.utils.getUserFromPref
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
+import com.renatsayf.resourses.extensions.getImageFromInternalStorage
 import com.renatsayf.resourses.extensions.setPopUpMenu
 import com.renatsayf.resourses.extensions.toDeepLink
 import com.renatsayf.trade.R
@@ -95,6 +97,14 @@ class TradeListFragment : Fragment() {
 
         with(binding) {
 
+            this@TradeListFragment.getUserFromPref(onSuccess = { user ->
+                if (!user.photoPath.isNullOrEmpty()) {
+                    imgPhoto.getImageFromInternalStorage(user.photoPath!!, onSuccess = {
+                        imgPhoto.setImageBitmap(it)
+                    })
+                }
+            })
+
             includeCategory.rvCategoryList.adapter = categoryAdapter
             includeCategory.rvCategoryList.apply {
                 addItemDecoration(dividerItemDecor16)
@@ -163,6 +173,15 @@ class TradeListFragment : Fragment() {
                                 handleSuccessState(flash, latest)
                             }
                         }
+                    }
+                }
+            }
+            lifecycleScope.launchWhenStarted {
+                viewModel.user.observe(viewLifecycleOwner) { user ->
+                    user?.photoPath?.let { path ->
+                        imgPhoto.getImageFromInternalStorage(path, onSuccess = {
+                            imgPhoto.setImageBitmap(it)
+                        })
                     }
                 }
             }

@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.renatsayf.local.utils.saveUserToPref
 import com.renatsayf.login.R
 import com.renatsayf.login.databinding.FragmentLoginBinding
 import com.renatsayf.resourses.extensions.toDeepLink
@@ -76,8 +77,10 @@ class LoginFragment : Fragment() {
                             val message = "The user is not registered"
                             Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
                         }
-                        LoginViewModel.State.SuccessLogin -> {
-                            findNavController().navigate("trade".toDeepLink())
+                        is LoginViewModel.State.SuccessLogin -> {
+                            this@LoginFragment.saveUserToPref(state.user, onSaved = {
+                                findNavController().navigate("trade".toDeepLink())
+                            })
                         }
                     }
                 }
