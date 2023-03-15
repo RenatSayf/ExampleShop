@@ -16,12 +16,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.renatsayf.local.models.User
 import com.renatsayf.local.utils.getUserFromPref
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
+import com.renatsayf.resourses.extensions.fromJson
 import com.renatsayf.resourses.extensions.getImageFromInternalStorage
 import com.renatsayf.resourses.extensions.setPopUpMenu
 import com.renatsayf.resourses.extensions.toDeepLink
@@ -95,12 +99,18 @@ class TradeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         with(binding) {
 
-            this@TradeListFragment.getUserFromPref(onSuccess = { user ->
+            val userString = arguments?.getString("user")
+            Gson().fromJson(userString, User::class.java, onSuccess = { user ->
                 if (!user.photoPath.isNullOrEmpty()) {
-                    imgPhoto.getImageFromInternalStorage(user.photoPath!!, onSuccess = {
-                        imgPhoto.setImageBitmap(it)
+                    imgPhoto.getImageFromInternalStorage(user.photoPath!!, onSuccess = { bitmap ->
+                        imgPhoto.setImageBitmap(bitmap)
+                    }, onFailure = { str ->
+                        val error = "${this@TradeListFragment::class.java.simpleName} error - $str"
+                        Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
                     })
                 }
             })

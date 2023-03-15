@@ -10,6 +10,8 @@ import android.widget.ImageView
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.net.toUri
 import androidx.core.view.drawToBitmap
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import java.io.File
 import java.io.FileInputStream
 import kotlin.math.roundToInt
@@ -66,5 +68,20 @@ fun ImageView.getImageFromInternalStorage(
     catch (e: Exception) {
         e.printStackTrace()
         onFailure.invoke(e.message?: "Unknown error")
+    }
+}
+
+fun <T>Gson.fromJson(
+    json: String?,
+    clazz: Class<T>,
+    onSuccess: (T) -> Unit = {},
+    onFailure: (String) -> Unit = {}) {
+    try {
+        val fromJson = this.fromJson(json, clazz)
+        onSuccess.invoke(fromJson)
+    }
+    catch (e: Exception) {
+        e.printStackTrace()
+        onFailure.invoke("${e.message}")
     }
 }

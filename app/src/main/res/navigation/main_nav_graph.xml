@@ -26,9 +26,12 @@
         android:id="@+id/tradeListFragment"
         android:name="com.renatsayf.trade.lists.TradeListFragment"
         android:label="TradeListFragment">
+        <argument android:name="user"
+            app:argType="string"
+            android:defaultValue=""/>
         <deepLink
             android:id="@+id/deepLink2"
-            app:uri="ExampleShop://trade" />
+            app:uri="ExampleShop://trade/{user}" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
