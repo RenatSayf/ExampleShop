@@ -13,7 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.renatsayf.local.utils.saveUserToPref
+import com.google.gson.Gson
+import com.renatsayf.local.models.User
 import com.renatsayf.login.R
 import com.renatsayf.login.databinding.FragmentLoginBinding
 import com.renatsayf.resourses.extensions.toDeepLink
@@ -78,9 +79,8 @@ class LoginFragment : Fragment() {
                             Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
                         }
                         is LoginViewModel.State.SuccessLogin -> {
-                            this@LoginFragment.saveUserToPref(state.user, onSaved = {
-                                findNavController().navigate("trade".toDeepLink())
-                            })
+                            val userJson = Gson().toJson(state.user, User::class.java)
+                            findNavController().navigate("trade/${userJson}".toDeepLink())
                         }
                     }
                 }

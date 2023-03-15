@@ -64,10 +64,13 @@ class MainActivity : AppCompatActivity() {
         navigationView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
+                val manager = navHostFragment.childFragmentManager
                 when(item.itemId) {
                     R.id.home -> {
                         item.isChecked = true
-                        navController.navigate("trade".toDeepLink())
+                        val fragment = manager.primaryNavigationFragment
+                        val userString = fragment?.arguments?.getString("user")
+                        navController.navigate("trade/$userString".toDeepLink())
                     }
                     R.id.favorite -> {
                         //item.isChecked = true
@@ -80,7 +83,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.profile -> {
                         item.isChecked = true
-                        navController.navigate("profile".toDeepLink())
+                        val fragment = manager.primaryNavigationFragment
+                        val userString = fragment?.arguments?.getString("user")
+                        navController.navigate("profile/$userString".toDeepLink())
                     }
                 }
                 return false
