@@ -14,8 +14,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.renatsayf.local.utils.getUserFromPref
+import com.renatsayf.local.models.User
 import com.renatsayf.profile.databinding.FragmentProfileBinding
+import com.renatsayf.resourses.extensions.fromJson
 import com.renatsayf.resourses.extensions.getImageFromInternalStorage
 import com.renatsayf.resourses.extensions.saveImageToInternalStorage
 import com.renatsayf.resourses.extensions.toDeepLink
@@ -40,8 +41,12 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            this.getUserFromPref(onSuccess = { user ->
+            val userString = arguments?.getString("user")
+            fromJson(userString, User::class.java, onSuccess = { user ->
                 viewModel.getUserData(user.firstName, user.password)
+            }, onFailure = { err ->
+                val error = "${this::class.java.simpleName} error - $err"
+                Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
             })
         }
 
@@ -91,14 +96,16 @@ class ProfileFragment : Fragment() {
                 val uri = intent?.data
                 binding.includeAboutUser.ivUserPhoto.setImageURI(uri)
 
-                this@ProfileFragment.getUserFromPref(onSuccess = { user ->
+                val currentState = viewModel.state.value
+                if (currentState is ProfileViewModel.State.DataSuccess) {
+                    val user = currentState.user as User
                     binding.includeAboutUser.ivUserPhoto.saveImageToInternalStorage(
                         user.firstName,
                         onSuccess = { file ->
                             val updatedUser = user.copy(photoPath = file)
                             viewModel.updateUserData(updatedUser)
                         })
-                })
+                }
             }
         }
     )

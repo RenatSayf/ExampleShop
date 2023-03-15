@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.renatsayf.local.models.User
-import com.renatsayf.local.utils.saveUserToPref
 import com.renatsayf.login.R
 import com.renatsayf.login.databinding.FragmentLoginBinding
 import com.renatsayf.resourses.extensions.toDeepLink

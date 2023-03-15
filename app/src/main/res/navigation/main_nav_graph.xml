@@ -17,7 +17,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.renatsayf.login.back.LoginFragment"
-        android:label="LoginFragment">
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <deepLink
             android:id="@+id/deepLink3"
             app:uri="ExampleShop://login" />
@@ -25,7 +26,8 @@
     <fragment
         android:id="@+id/tradeListFragment"
         android:name="com.renatsayf.trade.lists.TradeListFragment"
-        android:label="TradeListFragment">
+        android:label="TradeListFragment"
+        tools:layout="@layout/fragment_trade_list">
         <argument android:name="user"
             app:argType="string"
             android:defaultValue=""/>
@@ -36,15 +38,21 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.renatsayf.profile.ProfileFragment"
-        android:label="ProfileFragment">
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
         <deepLink
             android:id="@+id/deepLink4"
-            app:uri="ExampleShop://profile" />
+            app:uri="ExampleShop://profile/{user}" />
+        <argument
+            android:name="user"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/tradeDetailFragment"
         android:name="com.renatsayf.trade.details.TradeDetailFragment"
-        android:label="TradeDetailFragment">
+        android:label="TradeDetailFragment"
+        tools:layout="@layout/fragment_trade_detail">
         <deepLink
             android:id="@+id/deepLink5"
             app:uri="ExampleShop://details" />
@@ -52,7 +60,8 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.renatsayf.trade.cart.CartFragment"
-        android:label="CartFragment">
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart">
         <deepLink
             android:id="@+id/deepLink6"
             app:uri="ExampleShop://cart" />

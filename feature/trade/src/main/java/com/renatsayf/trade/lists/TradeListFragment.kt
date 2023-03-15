@@ -17,15 +17,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.renatsayf.local.models.User
-import com.renatsayf.local.utils.getUserFromPref
 import com.renatsayf.network.models.Category
 import com.renatsayf.network.models.product.FlashSales
 import com.renatsayf.network.models.product.LatestDeals
 import com.renatsayf.network.models.product.Product
-import com.renatsayf.resourses.extensions.fromJson
 import com.renatsayf.resourses.extensions.getImageFromInternalStorage
 import com.renatsayf.resourses.extensions.setPopUpMenu
 import com.renatsayf.resourses.extensions.toDeepLink
@@ -35,6 +32,7 @@ import com.renatsayf.trade.adapters.CategoryAdapter
 import com.renatsayf.trade.adapters.FlashSalesAdapter
 import com.renatsayf.trade.adapters.LatestDealsAdapter
 import com.renatsayf.trade.databinding.FragmentTradeListBinding
+import com.renatsayf.trade.utils.fromJson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -99,12 +97,10 @@ class TradeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         with(binding) {
 
             val userString = arguments?.getString("user")
-            Gson().fromJson(userString, User::class.java, onSuccess = { user ->
+            this@TradeListFragment.fromJson(userString, User::class.java, onSuccess = { user ->
                 if (!user.photoPath.isNullOrEmpty()) {
                     imgPhoto.getImageFromInternalStorage(user.photoPath!!, onSuccess = { bitmap ->
                         imgPhoto.setImageBitmap(bitmap)
@@ -141,7 +137,7 @@ class TradeListFragment : Fragment() {
             }
 
             imgPhoto.setOnClickListener {
-                findNavController().navigate("profile".toDeepLink())
+                findNavController().navigate("profile/$userString".toDeepLink())
             }
 
             btnUserLocation.setOnClickListener {

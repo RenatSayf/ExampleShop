@@ -1,6 +1,7 @@
 package com.renatsayf.resourses.extensions
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,11 +11,22 @@ import android.widget.ImageView
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.net.toUri
 import androidx.core.view.drawToBitmap
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import java.io.File
 import java.io.FileInputStream
 import kotlin.math.roundToInt
+
+private const val APP_PREF = "APP_PREF"
+
+fun Context.appPref(): SharedPreferences {
+    return getSharedPreferences(APP_PREF, Context.MODE_PRIVATE)
+}
+
+fun Fragment.appPref(): SharedPreferences {
+    return requireContext().appPref()
+}
 
 fun View.setPopUpMenu(menuResource: Int): PopupMenu {
     return PopupMenu(this.context, this).apply {
@@ -71,13 +83,13 @@ fun ImageView.getImageFromInternalStorage(
     }
 }
 
-fun <T>Gson.fromJson(
+fun <T>fromJson(
     json: String?,
     clazz: Class<T>,
     onSuccess: (T) -> Unit = {},
     onFailure: (String) -> Unit = {}) {
     try {
-        val fromJson = this.fromJson(json, clazz)
+        val fromJson = Gson().fromJson(json, clazz)
         onSuccess.invoke(fromJson)
     }
     catch (e: Exception) {
