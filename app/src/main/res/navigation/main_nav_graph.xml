@@ -55,7 +55,11 @@
         tools:layout="@layout/fragment_trade_detail">
         <deepLink
             android:id="@+id/deepLink5"
-            app:uri="ExampleShop://details" />
+            app:uri="ExampleShop://details/{user}" />
+        <argument
+            android:name="user"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

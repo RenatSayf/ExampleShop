@@ -27,12 +27,16 @@ class TradeListViewModel @Inject constructor(
     private var _user = MutableLiveData<User?>(null)
     val user: LiveData<User?> = _user
 
-    fun getUserData(name: String, password: String) {
+    fun getUserData(name: String, password: String, onSuccess: (User) -> Unit = {}, onFailure: (String) -> Unit = {}) {
 
         viewModelScope.launch {
             val result = db.getUserAsync(name, password).await()
             result.onSuccess { user ->
                 _user.value = user
+                onSuccess.invoke(user)
+            }
+            result.onFailure {
+                onFailure.invoke(it.message?: "Unknown error")
             }
         }
     }

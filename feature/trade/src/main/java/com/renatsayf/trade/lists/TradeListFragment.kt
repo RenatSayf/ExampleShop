@@ -101,14 +101,20 @@ class TradeListFragment : Fragment() {
 
             val userString = arguments?.getString("user")
             this@TradeListFragment.fromJson(userString, User::class.java, onSuccess = { user ->
-                if (!user.photoPath.isNullOrEmpty()) {
-                    imgPhoto.getImageFromInternalStorage(user.photoPath!!, onSuccess = { bitmap ->
-                        imgPhoto.setImageBitmap(bitmap)
-                    }, onFailure = { str ->
-                        val error = "${this@TradeListFragment::class.java.simpleName} error - $str"
-                        Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
-                    })
-                }
+
+                viewModel.getUserData(user.firstName, user.password, onSuccess = { u ->
+                    if (!u.photoPath.isNullOrEmpty()) {
+                        imgPhoto.getImageFromInternalStorage(u.photoPath!!, onSuccess = { bitmap ->
+                            imgPhoto.setImageBitmap(bitmap)
+                        }, onFailure = { str ->
+                            val error = "${this@TradeListFragment::class.java.simpleName} error - $str"
+                            Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
+                        })
+                    }
+                }, onFailure = {
+                    val error = "${this@TradeListFragment::class.java.simpleName} error - $it"
+                    Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
+                })
             })
 
             includeCategory.rvCategoryList.adapter = categoryAdapter
@@ -228,7 +234,8 @@ class TradeListFragment : Fragment() {
     }
 
     private fun latestDealsItemClick(product: Product) {
-        findNavController().navigate("details".toDeepLink())
+        val userString = arguments?.getString("user")
+        findNavController().navigate("details/$userString".toDeepLink())
     }
 
     private fun flashSalesItemClick(product: Product) {
